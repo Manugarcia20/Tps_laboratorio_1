@@ -73,7 +73,6 @@ int cargaJugadores(int*pArq,int*pDef,int*pMed,int*pDel,int*pUefa,int*pConmebol,i
 
 		camiseta = getInt("\nIngrese el numero de camiseta: ");
 		printf("\nElija la posicion del jugador: \n");
-
 		carga = subMenuPosicion();
 
 			switch(carga){
@@ -99,7 +98,7 @@ int cargaJugadores(int*pArq,int*pDef,int*pMed,int*pDel,int*pUefa,int*pConmebol,i
 				break;
 		}
 
-
+			if(*pArq < 3){
 			printf("\nElija la confederacion del jugador: \n");
 			conf = subMenuConf();
 			switch(conf){
@@ -141,11 +140,12 @@ int cargaJugadores(int*pArq,int*pDef,int*pMed,int*pDel,int*pUefa,int*pConmebol,i
 				break;
 			}
 			*pJugTotales = *pJugTotales + jugTotales;
+
 			}
 			isOk = 1;
 
 
-
+	}
 
 	return isOk;
 	}

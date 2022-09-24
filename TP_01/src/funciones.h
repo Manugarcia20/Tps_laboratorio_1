@@ -9,6 +9,13 @@
 #ifndef FUNCIONES_H_
 #define FUNCIONES_H_
 
+/// @param pHospedaje Almacena el valor ingresado del costo de hospedaje
+/// @param pComida Almacena el valor ingresado del costo de comida
+/// @param pTransporte Almacena el valor ingresado del costo de transporte
+/// @return retorna 1 si la carga salio bien
+int cargaCostos(float*pHospedaje,float*pComida,float*pTransporte);
+
+
 /// @param pArq Cuenta la cantidad de arqueros y los pasa por referencia
 /// @param pDef Cuenta la cantidad de defensores y los pasa por referencia
 /// @param pMed	Cuenta la cantidad de mediocampistas y los pasa por referencia

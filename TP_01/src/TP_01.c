@@ -50,8 +50,11 @@ int main(void) {
 			break;
 		case 2:
 			printf("\nUsted eligio: Carga de jugadores\n");
-			cargaJugadores(&arquero,&defensor,&mediocampista,&delantero,&uefa,&conmebol,&concacaf,&caf,&afc,&ofc,&jugTotales);
+			if(cargaJugadores(&arquero,&defensor,&mediocampista,&delantero,&uefa,&conmebol,&concacaf,&caf,&afc,&ofc,&jugTotales)== 1){
 			flag2 = 1;
+			}else{
+				printf("\nError. No se pudo cargar al jugador\n");
+			}
 			break;
 		case 3:
 			printf("\nUsted eligio: Realizar todos los calculos\n");
