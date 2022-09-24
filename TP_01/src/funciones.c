@@ -55,7 +55,7 @@ int cargaJugadores(int*pArq,int*pDef,int*pMed,int*pDel,int*pUefa,int*pConmebol,i
 	int isOk = 0;
 	int carga;
 	int conf;
-	int camiseta;
+	int camiseta = 0;
 	int arquero = 0;
 	int defensor = 0;
 	int medio = 0;
@@ -75,6 +75,7 @@ int cargaJugadores(int*pArq,int*pDef,int*pMed,int*pDel,int*pUefa,int*pConmebol,i
 		printf("\nElija la posicion del jugador: \n");
 
 		carga = subMenuPosicion();
+
 			switch(carga){
 			case 1:
 				printf("\nArquero\n");
@@ -96,7 +97,8 @@ int cargaJugadores(int*pArq,int*pDef,int*pMed,int*pDel,int*pUefa,int*pConmebol,i
 				delantero++;
 				*pDel = *pDel + delantero;
 				break;
-			}
+		}
+
 
 			printf("\nElija la confederacion del jugador: \n");
 			conf = subMenuConf();
@@ -139,8 +141,9 @@ int cargaJugadores(int*pArq,int*pDef,int*pMed,int*pDel,int*pUefa,int*pConmebol,i
 				break;
 			}
 			*pJugTotales = *pJugTotales + jugTotales;
-			isOk = 1;
 			}
+			isOk = 1;
+
 
 
 
@@ -163,8 +166,28 @@ int calcularPromedio(int uefa, int conmebol, int concacaf, int caf, int afc, int
 
 	return isOk;
 }
+int calcularMantenimiento(int hospedaje, int comida, int transporte, float* mantenimiento,
+	float promUefa,float promConmebol,float promConcacaf,float promCaf,float promAfc,float promOfc, float* aumento, float* nuevoCosto){
 
-int informarTodo(float promUefa,float promConmebol,float promConcacaf,float promCaf,float promAfc,float promOfc){
+	int isOk =0;
+
+	*mantenimiento = hospedaje + comida + transporte;
+
+//	if(promUefa != NULL && promConmebol != NULL && promConcacaf != NULL && promCaf != NULL && promAfc != NULL && promOfc != NULL){
+		if(promUefa > promConmebol && promUefa > promConcacaf && promUefa > promCaf &&promUefa > promAfc &&promUefa > promOfc){
+			*aumento = *mantenimiento * 35 / 100 ;
+			*nuevoCosto =  *mantenimiento + *aumento;
+		}
+
+
+
+//	}
+
+	isOk=1;
+	return isOk;
+}
+
+int informarTodo(float promUefa,float promConmebol,float promConcacaf,float promCaf,float promAfc,float promOfc, float mantenimiento, float aumento, float nuevoCosto){
 	int isOk = 0;
 
 	printf("\nPromedio de jugadores UEFA: %.2f", promUefa);
@@ -173,6 +196,17 @@ int informarTodo(float promUefa,float promConmebol,float promConcacaf,float prom
 	printf("\nPromedio de jugadores CAF: %.2f", promCaf);
 	printf("\nPromedio de jugadores AFC: %.2f", promAfc);
 	printf("\nPromedio de jugadores OFC: %.2f", promOfc);
+	printf("\n\n");
+
+
+	if(promUefa > promConmebol && promUefa > promConcacaf && promUefa > promCaf &&promUefa > promAfc &&promUefa > promOfc){
+
+	printf("\nEl costo de mantenimiento era de $%.2f y recibio un aumento de $%.2f, siendo su nuevo valor $%.2f", mantenimiento,aumento,nuevoCosto);
+
+	}else{
+		printf("\nEl costo de mantenimiento es de : $%.2f", mantenimiento);
+	}
+
 	printf("\n\n");
 	isOk=1;
 
