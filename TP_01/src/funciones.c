@@ -55,7 +55,7 @@ int cargaJugadores(int*pArq,int*pDef,int*pMed,int*pDel,int*pUefa,int*pConmebol,i
 	int isOk = 0;
 	int carga;
 	int conf;
-	int camiseta = 0;
+	int camiseta;
 	int arquero = 0;
 	int defensor = 0;
 	int medio = 0;
@@ -71,7 +71,8 @@ int cargaJugadores(int*pArq,int*pDef,int*pMed,int*pDel,int*pUefa,int*pConmebol,i
 
 	if(pArq != NULL && pDef != NULL && pMed != NULL && pDel != NULL){
 
-		camiseta = getInt("\nIngrese el numero de camiseta: ");
+		camiseta= getInt("\nIngrese el numero de camiseta: ");
+
 		printf("\nElija la posicion del jugador: \n");
 		carga = subMenuPosicion();
 
@@ -98,7 +99,7 @@ int cargaJugadores(int*pArq,int*pDef,int*pMed,int*pDel,int*pUefa,int*pConmebol,i
 				break;
 		}
 
-			if(*pArq < 3){
+
 			printf("\nElija la confederacion del jugador: \n");
 			conf = subMenuConf();
 			switch(conf){
@@ -141,7 +142,7 @@ int cargaJugadores(int*pArq,int*pDef,int*pMed,int*pDel,int*pUefa,int*pConmebol,i
 			}
 			*pJugTotales = *pJugTotales + jugTotales;
 
-			}
+
 			isOk = 1;
 
 
