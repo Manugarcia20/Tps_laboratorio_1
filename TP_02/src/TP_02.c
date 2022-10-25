@@ -94,36 +94,36 @@ eJugador jugadores[TAM_J];
 				informes = subMenuInformes();
 				switch(informes){
 				case 1:
-					printf("Usted eligio:Listado de los jugadores ordenados alfabéticamente por nombre de confederación y nombre de jugador:  ");
+					printf("Usted eligio:Listado de los jugadores ordenados alfabéticamente por nombre de confederación y nombre de jugador:  \n");
 					OrdenarPorNombreConfederacionYNombreJugador(jugadores,TAM_J,confederaciones,TAM_C);
 					MostrarListaJugadores(jugadores,TAM_J,confederaciones,TAM_C);
 					break;
 				case 2:
-					printf("Usted eligio: Listado de confederaciones con sus jugadores: ");
+					printf("Usted eligio: Listado de confederaciones con sus jugadores: \n");
 					MostrarJugadorPorConfederacion(jugadores,TAM_J,confederaciones,TAM_C);
 					break;
 				case 3:
-					printf("Usted eligio: Total y promedio de todos los salarios y cuántos jugadores cobran más del salario promedio: ");
+					printf("Usted eligio: Total y promedio de todos los salarios y cuántos jugadores cobran más del salario promedio: \n");
 					CalcularTotalYPromedio(jugadores,TAM_J,&promedio);
 					SuperanPromedio(jugadores,TAM_J,promedio);
 					break;
 				case 4:
-					printf("Usted eligio: Informar la confederación con mayor cantidad de años de contratos total: ");
+					printf("Usted eligio: Informar la confederación con mayor cantidad de años de contratos total: \n");
 					ConfederacionConMasAniosContrato(jugadores,TAM_J);
 					break;
 				case 5:
-					printf("Usted eligio: Informar porcentaje de jugadores por cada confederación: ");
+					printf("Usted eligio: Informar porcentaje de jugadores por cada confederación: \n\n");
 					CalcularPorcentajeJugadoresPorConfederacion(jugadores,TAM_J,&porcentajeConmebol,&porcentajeUefa,&porcentajeAfc,&porcentajeCaf,
 					&porcentajeConcacaf,&porcentajeOfc);
 					MostrarPorcentajeJugadoresPorConfederacion(jugadores,TAM_J,porcentajeConmebol,porcentajeUefa,porcentajeAfc,porcentajeCaf,
 					porcentajeConcacaf,porcentajeOfc);
 					break;
 				case 6:
-					printf("Usted eligio: Informar cual es la región con más jugadores y el listado de los mismos: ");
+					printf("Usted eligio: Informar cual es la región con más jugadores y el listado de los mismos: \n\n");
 					CalcularRegionMaxJugadores(jugadores,TAM_J,confederaciones,TAM_C);
 					break;
 				case 7:
-					printf("\nUsted eligio: Salir");
+					printf("\nUsted eligio: Salir\n");
 					break;
 
 				}

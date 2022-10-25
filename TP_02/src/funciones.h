@@ -49,10 +49,10 @@ int SuperanPromedio(eJugador jugadores[], int tamJ, float promedio);
 /// @return retorna el valor del acumulador
 int AcumularAniosContratoPorConf(eJugador jugadores[], int tamJ, int conf);
 
-/// @param confederaciones
-/// @param id
-/// @param tamC
-/// @return
+/// @param confederaciones Le paso el array de estructuras de tipo eConfederacion
+/// @param id Le paso el id para buscar la confederacion con ese mismo id
+/// @param tamC Le paso el tamanio del array confederaciones
+/// @return retorna la posicion de la confederacion que corresponde con el id
 int BuscarPosConf(eConfederacion confederaciones[],int id, int tamC);
 
 

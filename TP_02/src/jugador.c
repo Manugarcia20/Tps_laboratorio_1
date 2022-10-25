@@ -252,7 +252,7 @@ int MostrarUnJugador(eJugador jugador, eConfederacion confederaciones[], int tam
 		{
 		CargarDescripcionConfederacion(confederaciones, tamC, jugador.idConfederacion, descConfederacion);
 
-		printf("\n%d    %-15s        %-15s\t\t%2hd\t\t%.2f\t%s\t\t%2hd\n",
+		printf("\n%d    %-15s        %-15s\t\t%2hd\t\t%.2f\t%s\t\t\t%2hd\n",
 																	 jugador.idJugador,
 															 	     jugador.nombre,
 																  	 jugador.posicion,
