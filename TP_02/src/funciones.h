@@ -15,16 +15,45 @@
 #define LLENO 1
 #define VACIO 0
 
-/// @brief Busca un espacio libre en el array libros de tipo eLibro
-/// @param libros Le paso el array de estructuras de tipo eLibro
-/// @param tam Le paso el tamanio del array
+/// @brief Busca un espacio libre en el array confederaciones de tipo eJugador
+/// @param jugadores Le paso el array de estructuras de tipo eJugador
+/// @param tam Le paso el tamanio del array jugadores
 /// @param pPosicion  Le paso el puntero pPosicion para que reciba la posicion encontrada
-/// @returnretorna 0 si salio bien
+/// @return retorna 0 si salio bien
 int BuscarEspacioLibre(eJugador jugadores[], int tam, int *pPosicion);
+
+/// @param jugadores Le paso el array de estructuras de tipo eJugador
+/// @param tamJ Le paso el tamanio del array jugadores
+/// @param confederaciones Le paso el array de estructuras de tipo eConfederacion
+/// @param tamC Le paso el tamanio del array confederaciones
+/// @return retorna 1 si salio bien
 int OrdenarPorNombreConfederacionYNombreJugador(eJugador jugadores[], int tamJ, eConfederacion confederaciones[], int tamC);
-float CalcularTotalYPromedio(eJugador jugadores[], int tamJ,float *promedio);
+
+/// @brief Acumula y cuenta la cantidad de salarios para sacar el total y promedio de los mismos
+/// @param jugadores Le paso el array de estructuras de tipo eJugador
+/// @param tamJ Le paso el tamanio del array jugadores
+/// @param promedio Le paso el puntero promedio para que reciba el promedio calculado
+/// @return retorna 1 si salio bien
+int CalcularTotalYPromedio(eJugador jugadores[], int tamJ,float *promedio);
+
+/// @brief Calcula cuantos jugadores superan el salario promedio y los muestra
+/// @param jugadores Le paso el array de estructuras de tipo eJugador
+/// @param tamJ Le paso el tamanio del array jugadores
+/// @param promedio le paso la variable promedio para que la utilize en el calculo de superan promedio
+/// @return retorna 1 si se hizo correctamente
 int SuperanPromedio(eJugador jugadores[], int tamJ, float promedio);
+
+/// @param jugadores Le paso el array de estructuras de tipo eJugador
+/// @param tamJ Le paso el tamanio del array jugadores
+/// @param conf le paso la variable conf para que la utilize en la condicion del if para acumular correctamente
+/// @return retorna el valor del acumulador
 int AcumularAniosContratoPorConf(eJugador jugadores[], int tamJ, int conf);
+
+/// @param confederaciones
+/// @param id
+/// @param tamC
+/// @return
+int BuscarPosConf(eConfederacion confederaciones[],int id, int tamC);
 
 
 

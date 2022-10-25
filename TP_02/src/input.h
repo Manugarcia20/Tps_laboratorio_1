@@ -41,11 +41,7 @@ float getFloat();
  */
 char getChar();
 
-
-
-
-
-
+/// @param mensaje pide un numero de tipo short
 short getShort(char* mensaje);
 
 /**

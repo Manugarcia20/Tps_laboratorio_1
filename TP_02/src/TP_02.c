@@ -123,12 +123,12 @@ eJugador jugadores[TAM_J];
 					CalcularRegionMaxJugadores(jugadores,TAM_J,confederaciones,TAM_C);
 					break;
 				case 7:
-					printf("Usted eligio: Salir");
+					printf("\nUsted eligio: Salir");
 					break;
 
 				}
 			}while(informes != 7);
-			MostrarListaJugadores(jugadores,TAM_J,confederaciones,TAM_C);
+			//MostrarListaJugadores(jugadores,TAM_J,confederaciones,TAM_C);
 			}else{
 				printf("\nNo se pueden realizar informes sin antes dar de alta jugadores\n");
 			}

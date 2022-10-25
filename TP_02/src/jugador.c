@@ -61,7 +61,7 @@ int AltaJugador(eJugador jugadores[], int tamJ, int *pId, eConfederacion confede
 
 					while (getStringLetras("\nIngrese la posicion del jugador: ",nuevoJugador.posicion) == -1)
 					{
-						fflush(stdin);
+
 						printf("\nCaracteres invalidos. Por favor, ingrese solo letras: ");
 					}
 
@@ -252,21 +252,25 @@ int MostrarUnJugador(eJugador jugador, eConfederacion confederaciones[], int tam
 		{
 		CargarDescripcionConfederacion(confederaciones, tamC, jugador.idConfederacion, descConfederacion);
 
-		printf("\n%d\t%s\t%s\t\t%hd\t%s\t%.2f\t%d\n",    	 		 jugador.idJugador,
+		printf("\n%d    %-15s        %-15s\t\t%2hd\t\t%.2f\t%s\t\t%2hd\n",
+																	 jugador.idJugador,
 															 	     jugador.nombre,
 																  	 jugador.posicion,
 																	 jugador.numeroCamiseta,
-																	 descConfederacion,
 																	 jugador.salario,
+																	 descConfederacion,
 																	 jugador.aniosContrato
 																  );
-		printf("\n---------------------------------------------------------------------------------------------------------\n");
+		printf("\n-----------------------------------------------------------------------------------------------------------------------------------------\n");
 
 		}
 		isOk = 1;
 		return isOk;
 	}
 
+// 	printf(" _______________________________________________________________\n"
+//"|%-5s|%-15s|%-15s|%-13s|%-10s|\n"
+//"|=====|===============|===============|=============|==========|\n"
 
 
 int MostrarListaJugadores(eJugador jugadores[], int tamJ, eConfederacion confederaciones[], int tamC){
@@ -276,11 +280,12 @@ int MostrarListaJugadores(eJugador jugadores[], int tamJ, eConfederacion confede
 
 		if (jugadores != NULL && tamJ > 0) {
 
-			printf("\n---------------------------------------------------------------------------------------------------------\n");
+
+			printf("\n-------------------------------------------------------------------------------------------------------------------------------------\n");
 			printf("\n		*** LISTA DE JUGADORES ***		\n");
-			printf("--------------------------------------------------------------------------------------------------------\n");
-			printf("ID\tNOMBRE\tPOSICION NUMERO DE CAMISETA\tCONFEDERACION\tSALARIO\t\tANIOS DE CONTRATO\t\n");
-			printf("\n---------------------------------------------------------------------------------------------------------\n");
+			printf("---------------------------------------------------------------------------------------------------------------------------------------\n");
+			printf("ID\tNOMBRE\t\t  POSICION\t\tNUMERO DE CAMISETA\tSALARIO\t\tCONFEDERACION\t  ANIOS DE CONTRATO\t\n");
+			printf("\n-------------------------------------------------------------------------------------------------------------------------------------\n");
 
 			for (i = 0; i < tamJ; i++) {
 				if (jugadores[i].isEmpty == LLENO) {
@@ -361,7 +366,7 @@ int ofc;
 
 
 
-int CalcularPorcentajeJugadoresPorConfederacion(eJugador jugadores[], int tamJ,float* porcentajeConmebol,float* porcentajeUefa, float* porcentajeAfc, float* porcentajeCaf,
+void CalcularPorcentajeJugadoresPorConfederacion(eJugador jugadores[], int tamJ,float* porcentajeConmebol,float* porcentajeUefa, float* porcentajeAfc, float* porcentajeCaf,
 float* porcentajeConcacaf,float* porcentajeOfc){
 
 
@@ -420,7 +425,6 @@ int contJugTotales = 0;
     *porcentajeOfc = contJugOfc * 100 / contJugTotales;
 
 
-	return 0;
 }	// fin funcion
 
 
@@ -447,6 +451,7 @@ int CalcularRegionMaxJugadores(eJugador jugadores[], int tamJ, eConfederacion co
 	int contJugConcacaf = 0;
 	int contJugOfc = 0;
 	int masJugadores;
+	int isOk;
 
 
 	for(int i = 0; i < tamJ ;i++)
@@ -514,12 +519,13 @@ int CalcularRegionMaxJugadores(eJugador jugadores[], int tamJ, eConfederacion co
 			for(int i = 0; i < tamJ ;i++){
 				if(jugadores[i].isEmpty == LLENO && jugadores[i].idConfederacion == masJugadores){
 					MostrarUnJugador(jugadores[i],confederaciones,tamJ,tamC);
+					isOk =1;
 					}
 				}
 
 
 
-	return 0;
+	return isOk;
 	}
 
 

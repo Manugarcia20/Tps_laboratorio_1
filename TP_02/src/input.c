@@ -86,7 +86,7 @@ int getValidInt(char requestMessage[],char errorMessage[], int lowLimit, int hiL
 int getValidFloat(char requestMessage[],char errorMessage[], int lowLimit, int hiLimit)
 {
     char auxStr[256];
-    float auxInt;
+    int auxInt;
     while(1)
     {
         if (!getStringFlotantes(requestMessage,auxStr))

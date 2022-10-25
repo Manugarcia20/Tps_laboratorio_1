@@ -38,34 +38,48 @@ int BuscarEspacioLibre(eJugador jugadores[], int tam, int *pPosicion){
 
 int OrdenarPorNombreConfederacionYNombreJugador(eJugador jugadores[], int tamJ, eConfederacion confederaciones[], int tamC){
 	  eJugador auxJugador;
+		int posicionConf;
+		int posicionConfDos;
+		int isOk = -1;
 
-		for( int i=0; i<tamJ-1; i++){
-			if(jugadores[i].isEmpty == LLENO){
-			for( int j=i+1; j<tamJ; j++ ){
+
+
+		for( int i=0; i<tamJ-1; i++)
+		{
+			for( int j=i+1; j<tamJ; j++ )
+			{
+			if(jugadores[i].isEmpty == LLENO)
+			{
+
+				posicionConf = BuscarPosConf(confederaciones,jugadores[i].idConfederacion,tamC);
+				posicionConfDos = BuscarPosConf(confederaciones,jugadores[j].idConfederacion,tamC);
+
 				//       'M' > 'F'
-				if(strcmp(confederaciones[i].nombre, confederaciones[j].nombre) < 0){
+				if(strcmp(confederaciones[posicionConf].nombre, confederaciones[posicionConfDos].nombre) > 0){
 					auxJugador = jugadores[i];
 					jugadores[i] = jugadores[j];
 					jugadores[j] = auxJugador;
 				}
 				// 'M' < 'F' || 'F' == 'F' || 'M' == 'M'
 				else{
-					if(strcmp(confederaciones[i].nombre, confederaciones[j].nombre) == 0){
-						if(strcmp( jugadores[i].nombre, jugadores[j].nombre) < 0 ){
+					if(jugadores[i].idConfederacion == jugadores[j].idConfederacion){
+						if(strcmp( jugadores[i].nombre, jugadores[j].nombre) > 0 ){
 							auxJugador = jugadores[i];
 							jugadores[i] = jugadores[j];
 							jugadores[j] = auxJugador;
 						}
 					}
-				}
+				    }
 			}
+		   }
+
+		isOk = 1;
 		}
-		}
-			 return 0;
+			 return isOk;
 }
 
 
-float CalcularTotalYPromedio(eJugador jugadores[], int tamJ,float *promedio){
+int CalcularTotalYPromedio(eJugador jugadores[], int tamJ,float *promedio){
 	int isOk =0;
 	float acumSalario =0;
 	int cantSalarios =0;
@@ -115,6 +129,21 @@ int AcumularAniosContratoPorConf(eJugador jugadores[], int tamJ, int conf){
 	return acumConf;
 }
 
+int BuscarPosConf(eConfederacion confederaciones[],int id, int tamC){
+	int posicionConf;
 
+		posicionConf = -1; /*En caso de no haber espacio, lista nula o id inexistente*/
+
+		if (confederaciones != NULL && tamC > 0) {
+			for (int i = 0; i < tamC; i++) {
+				if (confederaciones[i].id == id) {
+					posicionConf = i;
+				}
+			}
+		}
+		return posicionConf;
+
+
+}
 
 
