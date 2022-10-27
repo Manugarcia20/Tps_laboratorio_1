@@ -24,8 +24,10 @@ int subMenuInformes();
 /// @return retorna la opcion elegida por el usuario para el sub menu de las listas
 int subMenuListar();
 
+/// @brief Despliega un menu de opciones para los informes de jugador por confederacion
+/// @return
 int subMenuListarJugadorPorConfederacion();
 
-
+subMenuModificarConfederacion();
 
 #endif /* MENU_H_ */

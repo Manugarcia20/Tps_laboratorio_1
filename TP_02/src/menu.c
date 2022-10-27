@@ -108,7 +108,25 @@ int subMenuListarJugadorPorConfederacion(){
 
 }
 
+subMenuModificarConfederacion(){
+	int opcion;
+			printf("\n\n");
+			printf("\nQUE DESEA MODIFICAR?\n");
 
+			printf("\n1 - NOMBRE\n");
+			printf("\n2 - REGION\n");
+			printf("\n3 - ANIO DE CREACION\n");
+			printf("\n4 - SALIR\n");
+
+
+			opcion = getValidInt("\nElija una opcion: ", "Error. Ingrese una opcion valida: ", 1,4);
+
+			return opcion;
+
+
+
+
+}
 
 
 

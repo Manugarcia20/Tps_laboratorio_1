@@ -7,15 +7,15 @@
 
 #ifndef JUGADOR_H_
 #define JUGADOR_H_
-#define TAM_J 6
-#define LLENO 1
-#define VACIO 0
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "confederacion.h"
 
+#define TAM_J 6
+#define LLENO 1
+#define VACIO 0
 
 
 typedef struct {
