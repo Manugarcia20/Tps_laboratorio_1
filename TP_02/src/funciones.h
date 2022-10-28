@@ -19,7 +19,7 @@
 /// @param jugadores Le paso el array de estructuras de tipo eJugador
 /// @param tam Le paso el tamanio del array jugadores
 /// @param pPosicion  Le paso el puntero pPosicion para que reciba la posicion encontrada
-/// @return retorna 0 si salio bien
+/// @return retorna 1 si salio bien
 int BuscarEspacioLibre(eJugador jugadores[], int tam, int *pPosicion);
 
 /// @param jugadores Le paso el array de estructuras de tipo eJugador

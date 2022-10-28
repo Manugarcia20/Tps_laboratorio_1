@@ -108,7 +108,7 @@ int subMenuListarJugadorPorConfederacion(){
 
 }
 
-subMenuModificarConfederacion(){
+int subMenuModificarConfederacion(){
 	int opcion;
 			printf("\n\n");
 			printf("\nQUE DESEA MODIFICAR?\n");

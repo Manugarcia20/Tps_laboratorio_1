@@ -28,6 +28,9 @@ int subMenuListar();
 /// @return
 int subMenuListarJugadorPorConfederacion();
 
-subMenuModificarConfederacion();
+/// @brief  Despliega un menu de opciones para modificar las confederaciones
+/// @return retorna la opcion elegida por el usuario
+int subMenuListar();
+int subMenuModificarConfederacion();
 
 #endif /* MENU_H_ */

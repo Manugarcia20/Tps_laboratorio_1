@@ -24,7 +24,7 @@ int main(void) {
 int opcion;
 int informes;
 int pId = 1;
-int pIdC =1;
+//int pIdC =1;
 int idJugadorBaja = 0;
 int idJugadorCambio = 0;
 float promedio;

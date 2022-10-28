@@ -6,6 +6,8 @@
  */
 
 #include "confederacion.h"
+#include "input.h"
+#include "menu.h"
 
 void MostrarConfederacion(eConfederacion confederaciones[], int tamC){
 		printf("\nID\tNOMBRE\t\tREGION\t\t\tANIO DE CREACION\n");
@@ -194,7 +196,7 @@ int ModificarConfederacion(eConfederacion confederaciones[], int tamC, int idCon
 
 						MostrarConfederacion(confederaciones,tamC); //--muestro confederaciones activas
 						idConfederacionCambio = getValidInt( "\nIngrese el id del jugador a modificar:  ", "Error, ingrese un ID valido:  ", 1, 3000);
-						posConfCambio = BuscarJugador(confederaciones, tamC, idConfederacionCambio);
+						posConfCambio = BuscarConfederacion(confederaciones, tamC, idConfederacionCambio);
 						if (posConfCambio != -1) //la confederacion existe
 								{
 							respuesta = getChar("\nEsta seguro de que quiere modificar la confederacion %d ? s/n ");
