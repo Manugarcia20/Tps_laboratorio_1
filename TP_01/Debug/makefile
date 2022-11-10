@@ -9,8 +9,6 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include src/subdir.mk
--include objects.mk
-
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(strip $(C_DEPS)),)
 -include $(C_DEPS)
@@ -39,7 +37,7 @@ all: main-build
 main-build: TP_01
 
 # Tool invocations
-TP_01: $(OBJS) $(USER_OBJS) makefile objects.mk $(OPTIONAL_TOOL_DEPS)
+TP_01: $(OBJS) $(USER_OBJS) makefile $(OPTIONAL_TOOL_DEPS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MacOS X C Linker'
 	gcc  -o "TP_01" $(OBJS) $(USER_OBJS) $(LIBS)

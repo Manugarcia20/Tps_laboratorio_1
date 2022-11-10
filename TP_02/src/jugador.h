@@ -13,7 +13,7 @@
 
 #include "confederacion.h"
 
-#define TAM_J 6
+#define TAM_J 3000
 #define LLENO 1
 #define VACIO 0
 
