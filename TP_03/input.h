@@ -24,6 +24,10 @@
 int getInt();
 
 
+///**
+
+// */int getInt2(char mensaje[],char mensajeError[],int* valorARetornar);
+
 /**
  * \brief Solicita un número al usuario y devuelve el resultado
  * \param mensaje Es el mensaje a ser mostrado

@@ -149,6 +149,29 @@ int getStringLetras(char mensaje[],char input[])
     }
 }
 
+//int getInt2(char mensaje[],char mensajeError[],int* valorARetornar)
+//{
+//	int numeroIntIngresado;
+//	int retornoScanf;
+//	int retornoOk = 0;
+//
+//		printf("%s",mensaje);
+//		retornoScanf = scanf("%d",&numeroIntIngresado);
+//		//printf("Este es el retorno del scanf %d", retornoScanf);
+//		if(retornoScanf<=0)
+//		{
+//			printf("%s",mensajeError);
+//		}
+//		else
+//		{
+//			*valorARetornar = numeroIntIngresado;
+//			retornoOk = 1;
+//		}
+//
+//	return retornoOk;
+//}
+
+
 int getStringNumeros(char mensaje[],char input[])
 {
     char aux[256];

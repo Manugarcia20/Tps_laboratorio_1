@@ -22,7 +22,13 @@ int subMenuInformes();
 //
 ///// @brief Despliega un menu de opciones para listar
 ///// @return retorna la opcion elegida por el usuario para el sub menu de las listas
-//int subMenuListar();
+int subMenuConvocar();
+
+///// @brief Despliega un menu de opciones para listar los ordenamientos
+///   @return retorna la opcion elegida por el usuario para el sub menu de los ordenamientos
+int subMenuOrdenarYListarJugadores();
+
+
 
 
 #endif /* MENU_H_ */

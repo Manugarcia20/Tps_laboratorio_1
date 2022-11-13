@@ -40,5 +40,10 @@ int jug_setIdSeleccion(Jugador* this,int idSeleccion);
 int jug_getIdSeleccion(Jugador* this,int* idSeleccion);
 
 int convocarJugadores(LinkedList* pArrayListSeleccion,LinkedList* pArrayListJugador);
+int listarJugadoresConvocados(LinkedList* pArrayListJugador);
+int desconvocarJugadores(LinkedList* pArrayListJugador,LinkedList* pArrayListSeleccion);
 
+int ordenarJugadoresPorNacionalidad(void* jugador1,void* jugador2);
+int ordenarJugadoresPorEdad(void* jugador1,void* jugador2);
+int ordenarJugadoresPorNombre(void* jugador1,void* jugador2);
 #endif // jug_H_INCLUDED

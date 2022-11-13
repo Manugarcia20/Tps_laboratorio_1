@@ -23,6 +23,12 @@ int selec_getConfederacion(Seleccion* this,char* confederacion);
 int selec_setConvocados(Seleccion* this,int convocados);
 int selec_getConvocados(Seleccion* this,int* convocados);
 
-
+int ordenarSeleccionesPorConfederacion(void* seleccion1,void* seleccion2);
+//int incrementarConvocadosPorSeleccion(LinkedList* pArrayListSeleccion, int* jugIdSelec);
+int selec_SetIncrementoConvocados(LinkedList* this, int jugIdSelec);
+int selec_SetDecrementoConvocados(LinkedList* this, int jugIdSelec);
 
 #endif // selec_H_INCLUDED
+
+
+//ll_sort(pArrayListSeleccion,ordenarSeleccionesPorId,1);

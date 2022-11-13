@@ -66,29 +66,34 @@ int subMenuInformes(){
 			return opcion;
 }
 
-int subMenuListar(){
+int subMenuConvocar(){
 	int opcion;
 				printf("\n\n");
-				printf("\nQUE DESEA LISTAR?\n");
+				printf("\nQUE DESEA HACER?\n");
 
-				printf("\n1 - EDITORIALES");
-				printf("\n2 - PAISES");
-				printf("\n3 - AUTORES");
-				printf("\n4 - GENEROS");
-				printf("\n5 - LIBROS");
-				printf("\n6 - LIBROS ORDENADOS POR IMPORTE (DESCENDENTE) Y TITULO (ASCENDENTEMENTE)");
-				printf("\n7 - LIBROS CUYO GENERO NO SEA NOVELA\n");
-				printf("\n8 - LIBROS DE AUTORES ARGENTINOS QUE CORRESPONDAN A UNA EDITORIAL DETERMINADA \n");
+				printf("\n1 - CONVOCAR\n");
+				printf("\n2 - QUITAR DE LA SELECCION\n");
+				printf("\n3 - SALIR\n");
 
-
-				printf("\n9 - SALIR\n");
-
-				opcion = getValidInt("\nElija una opcion: ", "Error. Ingrese una opcion valida: ", 1,9);
+				opcion = getValidInt("\nElija una opcion: ", "Error. Ingrese una opcion valida: ", 1,3);
 
 				return opcion;
 }
 
+int subMenuOrdenarYListarJugadores(){
+	int opcion;
+					printf("\n\n");
+					printf("\nQUE ORDENAMIENTO DESEA HACER?\n");
 
+					printf("\n1 - ORDENAR JUGADORES POR NACIONALIDAD\n");
+					printf("\n2 - ORDENAR JUGADORES POR EDAD\n");
+					printf("\n3 - ORDENAR JUGADORES POR NOMBRE\n");
+					printf("\n4 - SALIR\n");
+
+					opcion = getValidInt("\nElija una opcion: ", "Error. Ingrese una opcion valida: ", 1,4);
+
+					return opcion;
+}
 
 
 
