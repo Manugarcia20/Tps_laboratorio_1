@@ -192,7 +192,6 @@ int convocarJugadores(LinkedList* pArrayListSeleccion,LinkedList* pArrayListJuga
 	int posicion;
 	int id;
 
-
 //	int auxIdElegido;
 
 	Jugador* auxJugador = NULL;
@@ -218,6 +217,8 @@ int convocarJugadores(LinkedList* pArrayListSeleccion,LinkedList* pArrayListJuga
 
 		idSelecElegida = getInt("\nIngrese el ID de la seleccion a la cual quiere convocarlo : ","\nError. Ingrese un numero: ");
 		auxSeleccion = (Seleccion*)ll_get(pArrayListSeleccion,idSelecElegida-1); /// obtengo la posicion del aux seleccion
+
+
 		while(auxSeleccion == NULL)
 		{
 			idSelecElegida = getInt("\nErro. Ingrese otro ID de la seleccion a la cual quiere convocarlo nuevamente : ","\nError. Ingrese un numero: ");

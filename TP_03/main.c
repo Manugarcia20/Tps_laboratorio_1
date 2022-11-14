@@ -18,10 +18,11 @@ int main()
     int informes;
     int opcion;
     int flagCarga = 0;
-    int flagCargaSelec=0;
-    int flagBinario= 0;
-    int flagAlta =0;
-    int flagGuardar =0;
+    int flagCargaSelec = 0;
+    int flagBinario = 0;
+    int flagAlta = 0;
+    int flagGuardarJug = 0;
+    int flagGuardarSelec = 0;
     char guardar;
 
 
@@ -38,17 +39,17 @@ int main()
             case 1:
             	printf("\nUsted eligio: CARGA DE ARCHIVOS\n");
             	if(controller_cargarJugadoresDesdeTexto("jugadores.csv",listaJugadores) == 1){
-            		printf("\nARCHIVO DE JUGADORES CARGADO CORRECTAMENTE\n\n\n");
+            		printf("\nARCHIVO DE JUGADORES CARGADO CORRECTAMENTE\n");
             		flagCarga = 1;
             	}else{
-            		printf("\nERROR, NO SE PUDO CARGAR EL ARCHIVO DE JUGADORES\n\n\n");
+            		printf("\nERROR, NO SE PUDO CARGAR EL ARCHIVO DE JUGADORES\n");
             	}
 
             	if(controller_cargarSeleccionesDesdeTexto("selecciones.csv",listaSelecciones) == 1){
-            		printf("\nARCHIVO DE SELECCIONES CARGADO CORRECTAMENTE\n\n");
+            		printf("\nARCHIVO DE SELECCIONES CARGADO CORRECTAMENTE\n");
             		flagCargaSelec =1;
             	}else{
-            		printf("\nERROR, NO SE PUDO CARGAR EL ARCHIVO DE SELECCIONES\n\n");
+            		printf("\nERROR, NO SE PUDO CARGAR EL ARCHIVO DE SELECCIONES\n");
             	}
                 break;
             case 2:
@@ -162,24 +163,36 @@ int main()
             case 9:
             	printf("\nUsted eligio: CARGAR ARCHIVO BINARIO\n");
             	if(flagBinario ==1){
-            		controller_guardarJugadoresModoBinario("JugadoresBinarios.dat" , listaConvocadosPorConf);
-
+            		controller_cargarJugadoresDesdeBinario("JugadoresBinarios.dat",listaConvocadosPorConf);
             	}else{
             		printf("\nNo se puede cargar el archivo binario sin antes haberlo generado\n");
             	}
                 break;
             case 10:
             	printf("\nUsted eligio: GUARDAR ARCHIVOS .CSV\n");
-            	if((flagCarga == 1 && flagCargaSelec == 1) || flagAlta == 1){
+            	if((flagCarga == 1 && flagCargaSelec == 1) || flagAlta == 1)
+            	{
+            		if(controller_guardarJugadoresModoTexto("jugadores.csv" ,listaJugadores) == 1)
+            		{
+            			printf("\nDATOS DE JUGADORES GUARDADOS CORRECTAMENTE\n");
+            			flagGuardarJug = 1;
+            		}
 
-            	flagGuardar =1;
-            	}else{
+            		 if(controller_guardarSeleccionesModoTexto("selecciones.csv",listaSelecciones) == 1)
+            		 {
+            			 printf("\nDATOS DE SELECCIONES GUARDADOS CORRECTAMENTE");
+            			 flagGuardarSelec = 1;
+            		 }
+
+            	}
+            	else
+            	{
             		printf("\nNo se pueden guardar los archivos .CSV sin antes cargar los archivos de jugadores y selecciones.\n");
             	}
                 break;
             case 11:
             	printf("\nUsted eligio: SALIR\n");
-            	if(flagGuardar == 1){
+            	if(flagGuardarJug == 1 && flagGuardarSelec == 1){
             	respuesta = getChar("\nEsta seguro de que quiere cerrar el programa? s/n: ");
             		if(respuesta == 's'||respuesta == 's')
             		{
@@ -187,9 +200,9 @@ int main()
             		option = 12;
             		}
             	}else{
-            		guardar = getChar("\nATENCION! No se guardaron los cambios en los archivos. Desea salir igualmente? s/n");
+            		guardar = getChar("\nATENCION! No se guardaron los cambios en los archivos. Desea salir igualmente? s/n: ");
             		if(guardar == 's' || guardar == 'S'){
-            			option =12;
+            			option = 12;
             		}
             	}
                 break;

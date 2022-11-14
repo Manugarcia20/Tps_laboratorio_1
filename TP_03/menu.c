@@ -16,6 +16,7 @@
 int menuOpciones(){
 
 	int opcion;
+			printf("\n\n");
 			printf("\n1 - CARGA DE ARCHIVOS\n");
 			printf("\n2 - ALTA DE JUGADORES\n");
 			printf("\n3 - MODIFICACION DE JUGADOR\n");
