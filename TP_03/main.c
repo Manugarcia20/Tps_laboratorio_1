@@ -179,7 +179,6 @@ int main()
             			printf("\nDATOS DE JUGADORES GUARDADOS CORRECTAMENTE\n");
             			flagGuardarJug = 1;
             		}
-
             		 if(controller_guardarSeleccionesModoTexto("selecciones.csv",listaSelecciones) == 1)
             		 {
             			 printf("\nDATOS DE SELECCIONES GUARDADOS CORRECTAMENTE");

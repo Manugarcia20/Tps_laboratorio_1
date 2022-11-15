@@ -20,29 +20,12 @@ int getInt(char* mensaje)
 }
 
 
-float getFloat(char* mensaje)
-{
-    float auxiliar;
-    printf("%s",mensaje);
-    scanf("%f",&auxiliar);
-    return auxiliar;
-}
-
-
 char getChar(char* mensaje)
 {
     char auxiliar;
     printf("%s",mensaje);
     fflush(stdin);
     scanf("%c",&auxiliar);
-    return auxiliar;
-}
-
-short getShort(char* mensaje)
-{
-    short auxiliar;
-    printf("%s",mensaje);
-    scanf("%hd",&auxiliar);
     return auxiliar;
 }
 

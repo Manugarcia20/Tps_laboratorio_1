@@ -448,7 +448,7 @@ int controller_guardarJugadoresModoTexto(char* path , LinkedList* pArrayListJuga
 		int idSeleccion;
 
 		int retorno = -1;
-		int retornoFscanf;
+
 
 		int cantidad;
 
@@ -474,7 +474,7 @@ int controller_guardarJugadoresModoTexto(char* path , LinkedList* pArrayListJuga
 				 jug_getNacionalidad(pJugador,nacionalidad);
 				 jug_getIdSeleccion(pJugador,&idSeleccion);
 
-				retornoFscanf = fprintf(archivo,"%d,%s,%d,%s,%s,%d\n",id,nombreCompleto,edad,posicion,nacionalidad,idSeleccion);
+				fprintf(archivo,"%d,%s,%d,%s,%s,%d\n",id,nombreCompleto,edad,posicion,nacionalidad,idSeleccion);
 //				printf("%d retornoFscanf\n", retornoFscanf);
 
 
@@ -495,7 +495,6 @@ int controller_guardarSeleccionesModoTexto(char* path , LinkedList* pArrayListSe
 		int  convocados;
 
 		int retorno = -1;
-		int retornoFscanf;
 		int cantidad;
 
 		FILE* archivo = NULL;
@@ -519,14 +518,9 @@ int controller_guardarSeleccionesModoTexto(char* path , LinkedList* pArrayListSe
 				 selec_getConfederacion(pSeleccion,confederacion);
 				 selec_getConvocados(pSeleccion,&convocados);
 
-				retornoFscanf = fprintf(archivo,"%d,%s,%s,%d\n",id,pais,confederacion,convocados);
-				if(retornoFscanf == 4)
-				{
-					retorno = 1;
-					return retorno;
-					fclose(archivo);
-				}
+				 fprintf(archivo,"%d,%s,%s,%d\n",id,pais,confederacion,convocados);
 			}
+					retorno = 1;
 		}
 		fclose(archivo);
 
