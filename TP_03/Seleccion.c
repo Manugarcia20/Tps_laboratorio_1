@@ -40,11 +40,6 @@ Seleccion* selec_newParametros(char* idStr,char* paisStr,char* confederacionStr,
 			strcpy(pSeleccion->confederacion,confederacionStr);
 			selec_setConvocados(pSeleccion,auxConvocadosStr);
 
-//
-//			selec_getPais(pSeleccion,paisStr);
-//			selec_getConfederacion(pSeleccion,confederacionStr);
-//			selec_getConvocados(pSeleccion,&auxConvocadosStr);
-
 		}
 	}
 
@@ -202,33 +197,6 @@ int selec_SetDecrementoConvocados(LinkedList* this, int jugIdSelec)
 
 
 
-//	int tamListSeleccion;
-//	int idSeleccion;
-//	int convocados = 0;
-//		tamListSeleccion = ll_len(pArrayListSeleccion);
-//			for(int i=0;i<tamListSeleccion-1;){
-//
-//				pSeleccion = (Seleccion*)ll_get(pArrayListSeleccion,i); /// obtengo la posicion de la seleccion
-//				selec_getId(pSeleccion,&idSeleccion); /// obtengo el id de la seleccion en esa posicion
-//
-//				printf("\nidSeleccion del jugador: %d  y el id de la seleccion es: %d",jugIdSelec,idSeleccion);
-//
-//				if(jugIdSelec == idSeleccion){ /// comparo si el idSeleccion del jugador es igual al id de la seleccion
-//				printf("\n idSeleccion del jugador %d, id de la seleccion %d\n",jugIdSelec,idSeleccion);
-//				pSeleccion = (Seleccion*)ll_get(pArrayListSeleccion,i); /// obtengo la posicion de la coincidencia
-//				convocados++; /// incremento el contador de convocados
-//				selec_setConvocados(pSeleccion,convocados); /// seteo el valor de convocados en convocados de la estructura seleccion
-//
-//				retorno = 0;
-//			}
-//
-//		}
-//		controller_listarSelecciones(pArrayListSeleccion);
-//	}
-//
-//
-//	return retorno;
-//}
 
 
 

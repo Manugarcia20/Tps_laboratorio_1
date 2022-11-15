@@ -55,7 +55,8 @@ int BuscarEspacioLibre(eJugador jugadores[], int tam, int *pPosicion){
 //ordena por nombre de la confederación y en caso de igualdad se ordena por
 //nombre del jugador).
 
-int OrdenarPorNombreConfederacionYNombreJugador(eJugador jugadores[], int tamJ, eConfederacion confederaciones[], int tamC){
+int OrdenarPorNombreConfederacionYNombreJugador(eJugador jugadores[], int tamJ, eConfederacion confederaciones[], int tamC)
+{
 	eJugador auxJugador;
 			int posicionConf;
 			int posicionConfDos;
@@ -74,23 +75,27 @@ int OrdenarPorNombreConfederacionYNombreJugador(eJugador jugadores[], int tamJ, 
 					posicionConfDos = BuscarPosConf(confederaciones,jugadores[j].idConfederacion,tamC);
 
 					//       'M' > 'F'
-					if(strcmp(confederaciones[posicionConf].nombre, confederaciones[posicionConfDos].nombre) > 0){
+					if(strcmp(confederaciones[posicionConf].nombre, confederaciones[posicionConfDos].nombre) > 0)
+					{
 						auxJugador = jugadores[i];
 						jugadores[i] = jugadores[j];
 						jugadores[j] = auxJugador;
 					}
 					// 'M' < 'F' || 'F' == 'F' || 'M' == 'M'
-					else{
-						if(strcmp(confederaciones[posicionConf].nombre, confederaciones[posicionConfDos].nombre) == 0){
-							if(strcmp( jugadores[i].nombre, jugadores[j].nombre) > 0 ){
+					else
+					{
+						if(strcmp(confederaciones[posicionConf].nombre, confederaciones[posicionConfDos].nombre) == 0)
+						{
+							if(strcmp( jugadores[i].nombre, jugadores[j].nombre) > 0 )
+							{
 								auxJugador = jugadores[i];
 								jugadores[i] = jugadores[j];
 								jugadores[j] = auxJugador;
 							}
 						}
-					    }
+					}
 				}
-			   }
+			    }
 
 			isOk = 1;
 			}
@@ -104,8 +109,10 @@ int CalcularTotalYPromedio(eJugador jugadores[], int tamJ,float *promedio){
 	int cantSalarios =0;
 
 
-	for(int i = 0; i < tamJ ;i++){
-		if(jugadores[i].isEmpty == LLENO){
+	for(int i = 0; i < tamJ ;i++)
+	{
+		if(jugadores[i].isEmpty == LLENO)
+		{
 		acumSalario = acumSalario + jugadores[i].salario;
 		cantSalarios++;
 		}
@@ -123,11 +130,14 @@ int CalcularTotalYPromedio(eJugador jugadores[], int tamJ,float *promedio){
 int SuperanPromedio(eJugador jugadores[], int tamJ, float promedio){
 	int isOk =0;
 	int superan = 0;
-	for(int i = 0; i < tamJ ;i++){
-			if(jugadores[i].isEmpty == LLENO && jugadores[i].salario > promedio){
+
+	for(int i = 0; i < tamJ ;i++)
+	{
+			if(jugadores[i].isEmpty == LLENO && jugadores[i].salario > promedio)
+			{
 				superan++;
 			}
-		}
+	}
 	printf("\nHay %d jugador/es que superan el promedio de los salarios ",superan);
 	isOk =1;
 
@@ -139,8 +149,10 @@ int AcumularAniosContratoPorConf(eJugador jugadores[], int tamJ, int conf){
 
 	int acumConf = 0;
 
-				for(int i = 0; i < tamJ ;i++){
-					if(jugadores[i].isEmpty == LLENO && jugadores[i].idConfederacion == conf){
+				for(int i = 0; i < tamJ ;i++)
+				{
+					if(jugadores[i].isEmpty == LLENO && jugadores[i].idConfederacion == conf)
+					{
 						acumConf = acumConf + jugadores[i].aniosContrato;
 					}
 				}
@@ -153,9 +165,12 @@ int BuscarPosConf(eConfederacion confederaciones[],int id, int tamC){
 
 		posicionConf = -1; /*En caso de no haber espacio, lista nula o id inexistente*/
 
-		if (confederaciones != NULL && tamC > 0) {
-			for (int i = 0; i < tamC; i++) {
-				if (confederaciones[i].id == id) {
+		if (confederaciones != NULL && tamC > 0)
+		{
+			for (int i = 0; i < tamC; i++)
+			{
+				if (confederaciones[i].id == id)
+				{
 					posicionConf = i;
 				}
 			}

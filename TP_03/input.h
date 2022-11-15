@@ -23,11 +23,6 @@
  */
 int getInt();
 
-
-///**
-
-// */int getInt2(char mensaje[],char mensajeError[],int* valorARetornar);
-
 /**
  * \brief Solicita un número al usuario y devuelve el resultado
  * \param mensaje Es el mensaje a ser mostrado
@@ -45,8 +40,6 @@ float getFloat();
  */
 char getChar();
 
-/// @param mensaje pide un numero de tipo short
-short getShort(char* mensaje);
 
 /**
  * \brief Solicita un texto al usuario y lo devuelve
@@ -70,7 +63,11 @@ int getValidInt(char requestMessage[], char errorMessage[], int lowLimit,
 
 
 
-
+/// @param requestMessage
+/// @param errorMessage
+/// @param lowLimit
+/// @param hiLimit
+/// @return
 int getValidFloat(char requestMessage[],char errorMessage[], int lowLimit, int hiLimit);
 
 

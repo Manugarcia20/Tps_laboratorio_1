@@ -121,20 +121,22 @@ int controller_agregarJugador(LinkedList* pArrayListJugador)
 				pJugador = jug_new();
 				if (pJugador != NULL) {
 
-					if (getStringLetras("\nIngrese el nombre del jugador:  \n",auxNombre) != 0) {
-						printf("\n Error, intente nuevamente ingresando SOLO letras. \n");
+//
+					if(getStringLetras("\nIngrese el nombre del jugador:  \n",auxNombre) == -1) {
+
+						printf("\nError, intente nuevamente ingresando SOLO letras. \n");
 					}
 
 					edad = getValidInt("\nIngrese la edad del jugador:  ","\nError, ingrese solo numeros: ",16,45);
 
 					sprintf(auxEdad,"%d",edad);
 
-					if (getStringLetras("\nIngrese la posicion del jugador:  \n",auxPosicion) != 0) {
-						printf("\n Error, intente nuevamente ingresando SOLO letras. \n");
+					if (getStringLetras("\nIngrese la posicion del jugador:  \n",auxPosicion) == -1) {
+						printf("\nError, intente nuevamente ingresando SOLO letras. \n");
 					}
 
-					if (getStringLetras("\nIngrese la nacionalidad del jugador:  \n",auxNacionalidad) != 0) {
-						printf("\n Error, intente nuevamente ingresando SOLO letras. \n");
+					if (getStringLetras("\nIngrese la nacionalidad del jugador:  \n",auxNacionalidad) == 1) {
+						printf("\nError, intente nuevamente ingresando SOLO letras. \n");
 					}
 
 					sprintf(auxIdSeleccion,"%d",idSeleccion);
@@ -527,18 +529,6 @@ int controller_guardarSeleccionesModoTexto(char* path , LinkedList* pArrayListSe
 return retorno;
 }
 
-
-///** \brief Modificar datos de empleado
-// *
-// * \param path char*
-// * \param pArrayListSeleccion LinkedList*
-// * \return int
-// *
-// */
-//int controller_editarSeleccion(LinkedList* pArrayListSeleccion)
-//{
-//    return 1;
-//}
 
 
 int controller_listarSelecciones(LinkedList* pArrayListSeleccion)

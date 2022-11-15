@@ -19,6 +19,13 @@ int getInt(char* mensaje)
     return auxiliar;
 }
 
+float getFloat(char* mensaje)
+{
+    float auxiliar;
+    printf("%s",mensaje);
+    scanf("%f",&auxiliar);
+    return auxiliar;
+}
 
 char getChar(char* mensaje)
 {
@@ -36,6 +43,18 @@ void getString(char mensaje[],char input[])
     scanf ("%[^\n]", input);
 }
 
+
+int getStringNumeros(char mensaje[],char input[])
+{
+    char aux[256];
+    getString(mensaje,aux);
+    if(esNumerico(aux))
+    {
+        strcpy(input,aux);
+        return 1;
+    }
+    return 0;
+}
 int getValidInt(char requestMessage[],char errorMessage[], int lowLimit, int hiLimit)
 {
     char auxStr[256];
@@ -59,10 +78,19 @@ int getValidInt(char requestMessage[],char errorMessage[], int lowLimit, int hiL
         return auxInt;
 
     }
-
-
 }
 
+int getStringFlotantes(char mensaje[],char input[])
+{
+    char aux[256];
+    getString(mensaje,aux);
+    if(esNumericoFlotante(aux))
+    {
+        strcpy(input,aux);
+        return 1;
+    }
+    return 0;
+}
 int getValidFloat(char requestMessage[],char errorMessage[], int lowLimit, int hiLimit)
 {
     char auxStr[256];
@@ -74,20 +102,15 @@ int getValidFloat(char requestMessage[],char errorMessage[], int lowLimit, int h
             printf ("%s\n",errorMessage);
             fflush(stdin);
             continue;
-
         }
         auxInt = atof(auxStr);
         if(auxInt < lowLimit || auxInt > hiLimit)
         {
             printf ("El numero del debe ser mayor o igual  a %d y menor o igual a %d\n",lowLimit,hiLimit);
             continue;
-
         }
         return auxInt;
-
     }
-
-
 }
 
 
@@ -130,29 +153,6 @@ int getStringLetras(char mensaje[],char input[])
 }
 
 
-int getStringNumeros(char mensaje[],char input[])
-{
-    char aux[256];
-    getString(mensaje,aux);
-    if(esNumerico(aux))
-    {
-        strcpy(input,aux);
-        return 1;
-    }
-    return 0;
-}
-
-int getStringFlotantes(char mensaje[],char input[])
-{
-    char aux[256];
-    getString(mensaje,aux);
-    if(esNumericoFlotante(aux))
-    {
-        strcpy(input,aux);
-        return 1;
-    }
-    return 0;
-}
 
 int getStringAlfaNumerico(char mensaje[],char input[])
 {

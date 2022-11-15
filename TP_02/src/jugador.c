@@ -32,7 +32,7 @@ int InicializarJugadores(eJugador jugadores[], int tam){
 
 int AltaJugador(eJugador jugadores[], int tamJ, int *pId, eConfederacion confederaciones[], int tamC){
 
-	int isOk = 0;
+		int isOk = 0;
 		int posicion;
 		int idConfederacion;
 		float salario;
@@ -132,9 +132,10 @@ int BuscarJugador(eJugador jugadores[], int tamJ, int id){
 
 
 int BajaJugador(eJugador jugadores[], int tamJ, int idJugadorBaja, eConfederacion confederaciones[],int tamC){
-	int isOk;
-	int posJugadorBaja;
-	char respuesta;
+
+		int isOk;
+		int posJugadorBaja;
+		char respuesta;
 
 			isOk = -1;
 			if (jugadores != NULL && tamJ > 0) {
@@ -166,7 +167,7 @@ int BajaJugador(eJugador jugadores[], int tamJ, int idJugadorBaja, eConfederacio
 }
 
 int ModificarJugador(eJugador jugadores[], int tamJ , int idJugadorCambio, eConfederacion confederaciones[], int tamC){
-	int isOk;
+		int isOk;
 		int subMenu;
 		int posJugadorCambio;
 		short nuevaCamiseta;
@@ -274,22 +275,15 @@ int ModificarJugador(eJugador jugadores[], int tamJ , int idJugadorCambio, eConf
 
 int MostrarUnJugador(eJugador jugador, eConfederacion confederaciones[], int tamJ, int tamC){
 	int isOk = 0;
-		char descConfederacion[50];
+	char descConfederacion[50];
 
 
 		if(confederaciones != NULL && tamJ > 0)
 		{
 		CargarDescripcionConfederacion(confederaciones, tamC, jugador.idConfederacion, descConfederacion);
 
-		printf("\n%d    %-15s        %-15s\t\t%2hd\t\t%.2f\t%s\t\t\t%2hd\n",
-																	 jugador.idJugador,
-															 	     jugador.nombre,
-																  	 jugador.posicion,
-																	 jugador.numeroCamiseta,
-																	 jugador.salario,
-																	 descConfederacion,
-																	 jugador.aniosContrato
-																  );
+		printf("\n%d    %-15s        %-15s\t\t%2hd\t\t%.2f\t%s\t\t\t%2hd\n", jugador.idJugador, jugador.nombre,jugador.posicion,
+		 jugador.numeroCamiseta, jugador.salario,descConfederacion, jugador.aniosContrato);
 		printf("\n-----------------------------------------------------------------------------------------------------------------------------------------\n");
 
 		}
@@ -305,7 +299,7 @@ int MostrarUnJugador(eJugador jugador, eConfederacion confederaciones[], int tam
 int MostrarListaJugadores(eJugador jugadores[], int tamJ, eConfederacion confederaciones[], int tamC){
 
 	int i;
-		int isOK = 0;
+	int isOK = 0;
 
 		if (jugadores != NULL && tamJ > 0) {
 
@@ -330,6 +324,7 @@ int MostrarListaJugadores(eJugador jugadores[], int tamJ, eConfederacion confede
 
 
 int MostrarJugadorPorConfederacion(eJugador jugadores[], int tamJ, eConfederacion confederaciones[], int tamC){
+
 	int isOk =0;
 	int confElegida;
 
@@ -348,13 +343,15 @@ isOk = 1;
 }
 
 
-void ConfederacionConMasAniosContrato(eJugador jugadores[], int tamJ){
-int conmebol;
-int uefa;
-int afc;
-int caf;
-int concacaf;
-int ofc;
+void ConfederacionConMasAniosContrato(eJugador jugadores[], int tamJ)
+{
+
+	int conmebol;
+	int uefa;
+	int afc;
+	int caf;
+	int concacaf;
+	int ofc;
 
 
 
@@ -396,17 +393,16 @@ int ofc;
 
 
 void CalcularPorcentajeJugadoresPorConfederacion(eJugador jugadores[], int tamJ,float* porcentajeConmebol,float* porcentajeUefa, float* porcentajeAfc, float* porcentajeCaf,
-float* porcentajeConcacaf,float* porcentajeOfc){
+float* porcentajeConcacaf,float* porcentajeOfc)
+{
 
-
-
-int contJugConmebol = 0;
-int contJugUefa = 0;
-int contJugAfc = 0;
-int contJugCaf = 0;
-int contJugConcacaf = 0;
-int contJugOfc = 0;
-int contJugTotales = 0;
+	int contJugConmebol = 0;
+	int contJugUefa = 0;
+	int contJugAfc = 0;
+	int contJugCaf = 0;
+	int contJugConcacaf = 0;
+	int contJugOfc = 0;
+	int contJugTotales = 0;
 
 
 
