@@ -17,7 +17,13 @@ LinkedList* ll_newLinkedList(void)
 {
     LinkedList* this= NULL;
 
+
     this = (LinkedList*)malloc(sizeof(LinkedList));
+
+    if(this != NULL){
+    this->size = 0;
+    }
+
     return this;
 }
 
@@ -30,6 +36,13 @@ LinkedList* ll_newLinkedList(void)
 int ll_len(LinkedList* this)
 {
     int returnAux = -1;
+
+    if(this != NULL){
+
+    	returnAux = this->size;
+    }
+
+
     return returnAux;
 }
 
@@ -44,7 +57,24 @@ int ll_len(LinkedList* this)
  */
 static Node* getNode(LinkedList* this, int nodeIndex)
 {
-    return NULL;
+	int tamList;
+
+	Node* pNode = NULL;
+
+	tamList = ll_len(this);
+
+		if(this != NULL && nodeIndex >= 0 && nodeIndex < tamList)
+		{
+			///inicializo el puntero a nodo y lo igualo al primer nodo de this
+			pNode = this->pFirstNode; /// --> 0
+
+			for(int i = 0; i < nodeIndex; i++)///itero hasta el indice deseado
+			{
+				pNode = pNode->pNextNode;///luego cargo la direccion de memoria correspondiente al indice deseado
+			}
+		}
+
+	    return pNode;
 }
 
 /** \brief  Permite realizar el test de la funcion getNode la cual es privada
@@ -72,8 +102,49 @@ Node* test_getNode(LinkedList* this, int nodeIndex)
  */
 static int addNode(LinkedList* this, int nodeIndex,void* pElement)
 {
-    int returnAux = -1;
-    return returnAux;
+	int retorno = -1;
+	int tamList;
+
+	    Node* newNode;
+	    Node* prevNode;
+
+	    tamList = ll_len(this);
+
+
+	    if(this != NULL && nodeIndex >= 0 && nodeIndex <= tamList)
+	    {
+	    	newNode = (Node*) malloc(sizeof(Node)); /// asigno espacio en memoria para el nuevo nodo
+
+	    	if(newNode != NULL)
+	    	{
+	    	newNode->pElement = pElement; ///asigno el elemento de newNode al recibido por parametro
+
+//	    	newNode->pNextNode = NULL;
+
+	    	if(nodeIndex == 0)
+	    	{
+	    		newNode->pNextNode = this->pFirstNode;//le paso la dir de memo del 1er elemento
+	    		this->pFirstNode = newNode;//el nuevo first node sera el que cree
+	    	}
+	    	else
+	    	{
+	    		prevNode = getNode(this, nodeIndex - 1);//consigo la ubicacion del nodo previo al que creo
+	    		if(prevNode != NULL)
+	    		{
+	    		newNode->pNextNode = prevNode->pNextNode; /// linkeo el nodo previo con el puntero al nuevo nodo
+
+	    		prevNode->pNextNode = newNode; /// le paso al nodo previo la direccion del nuevo nodo. Ahora el nodo previo apunta al nodo siguiente, el nuevo nodo.
+	    		}
+	    	}
+
+	    	this->size++; ///le incremento el campo size a la lista
+	    	retorno = 0;
+
+	    	}
+	    }
+
+
+	    return retorno;
 }
 
 /** \brief Permite realizar el test de la funcion addNode la cual es privada

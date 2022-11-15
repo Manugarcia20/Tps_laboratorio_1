@@ -1,7 +1,7 @@
 /*
  ============================================================================
  Name        : TP_02.c
- Author      : 
+ Author      :
  Version     :
  Copyright   : Your copyright notice
  Description : Hello World in C, Ansi-style
@@ -24,12 +24,11 @@ int main(void) {
 int opcion;
 int informes;
 int pId = 1;
-//int pIdC =1;
 int idJugadorBaja = 0;
 int idJugadorCambio = 0;
 float promedio;
 char respuesta;
-int flagAlta = 0;
+
 
 float porcentajeConmebol;
 float porcentajeUefa;
@@ -40,12 +39,12 @@ float porcentajeOfc;
 
 
 eConfederacion confederaciones[TAM_C] = {
-		{100,"CONMEBOL","SUDAMERICA",1916,LLENO},
-		{101,"UEFA","EUROPA",1954,LLENO},
-		{102,"AFC","ASIA",1954,LLENO},
-		{103,"CAF","AFRICA",1957,LLENO},
-		{104,"CONCACAF","NORTE Y CENTRO AMERICA",1961,LLENO},
-		{105,"OFC","OCEANIA",1966,LLENO}
+		{100,"CONMEBOL","SUDAMERICA",1916},
+		{101,"UEFA","EUROPA",1954},
+		{102,"AFC","ASIA",1954},
+		{103,"CAF","AFRICA",1957},
+		{104,"CONCACAF","NORTE Y CENTRO AMERICA",1961},
+		{105,"OFC","OCEANIA",1966}
 };
 
 eJugador jugadores[TAM_J];
@@ -58,14 +57,13 @@ InicializarJugadores(jugadores,TAM_J);
 			printf("\nUsted eligio: ALTA\n");
 			if(AltaJugador(jugadores,TAM_J,&pId,confederaciones,TAM_C) == 1){
 				printf("\nALTA EXITOSA\n");
-				flagAlta = 1;
 			}else{
 				printf("\nNO SE PUDO REALIZAR EL ALTA CORRECTAMENTE\n");
 			}
 			break;
 		case 2:
 			printf("\nUsted eligio: BAJA\n");
-			if(flagAlta == 1){
+			if(ValidarAlta(jugadores,TAM_J) == 1){
 			if(BajaJugador(jugadores,TAM_J,idJugadorBaja,confederaciones,TAM_C) == 1){
 				MostrarListaJugadores(jugadores,TAM_J,confederaciones,TAM_C);
 				printf("\nBAJA EXITOSA\n");
@@ -79,7 +77,7 @@ InicializarJugadores(jugadores,TAM_J);
 			break;
 		case 3:
 			printf("\nUsted eligio: MODIFICACION\n");
-			if(flagAlta == 1){
+			if(ValidarAlta(jugadores,TAM_J) == 1){
 			if(ModificarJugador(jugadores,TAM_J,idJugadorCambio,confederaciones,TAM_C) == 1){
 				printf("\nMODIFICACION EXITOSA\n");
 			}else{
@@ -91,7 +89,7 @@ InicializarJugadores(jugadores,TAM_J);
 			break;
 		case 4:
 			printf("\nUsted eligio: INFORMAR\n");
-			if(flagAlta == 1){
+			if(ValidarAlta(jugadores,TAM_J) == 1){
 			MostrarListaJugadores(jugadores,TAM_J,confederaciones,TAM_C);
 			do{
 				informes = subMenuInformes();

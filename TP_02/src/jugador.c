@@ -199,9 +199,24 @@ int ModificarJugador(eJugador jugadores[], int tamJ , int idJugadorCambio, eConf
 									break;
 								case 2:
 									printf("\nUsted eligio: MODIFICAR POSICION\n");
-									while (getStringLetras("\nIngrese una nueva posicion: ", jugadores[posJugadorCambio].posicion) == -1)
+
+									printf("\nPOSICIONES\n- Arquero\n- Defensor\n- Mediocampista\n- Delantero\n");
+									if(getStringLetras("\nEscriba la posicion del jugador: ", jugadores[posJugadorCambio].posicion) == 0)
 									{
-									printf("\nCaracteres invalidos. Por favor, ingrese solo letras");
+									for (int i = 0; jugadores->posicion[i] != '\0'; i++){
+										jugadores[posJugadorCambio].posicion[i] = tolower(jugadores[posJugadorCambio].posicion[i]);
+									}
+									while(strcmp(jugadores[posJugadorCambio].posicion,"arquero") != 0 && strcmp(jugadores[posJugadorCambio].posicion,"defensor") != 0
+										&& strcmp(jugadores[posJugadorCambio].posicion,"mediocampista") != 0
+										&& strcmp(jugadores[posJugadorCambio].posicion,"delantero") != 0){
+										printf("\nPosicion invalida. Por favor, ingrese una posicion correcta.");
+										getStringLetras("\nEscriba la posicion del jugador: ",jugadores[posJugadorCambio].posicion);
+										for (int i = 0; jugadores[posJugadorCambio].posicion[i] != '\0'; i++){
+											jugadores[posJugadorCambio].posicion[i] = tolower(jugadores[posJugadorCambio].posicion[i]);
+											}
+									}
+									}else{
+										printf("\nCaracteres invalidos. Por favor, ingrese solo letras: ");
 									}
 									MostrarListaJugadores(jugadores,tamJ,confederaciones,tamC);
 									break;
@@ -541,8 +556,6 @@ int CalcularRegionMaxJugadores(eJugador jugadores[], int tamJ, eConfederacion co
 
 	return isOk;
 	}
-
-
 
 
 

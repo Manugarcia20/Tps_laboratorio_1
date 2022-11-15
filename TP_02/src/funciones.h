@@ -15,11 +15,17 @@
 #define LLENO 1
 #define VACIO 0
 
+/// @brief Valida si se hizo un alta o no
+/// @param jugadores Le paso el array de estructuras de tipo eJugador
+/// @param tamJ Le paso el tamanio del array jugadores
+/// @return retorna 1 si hay un espacio ocupado, 0 si no.
+int ValidarAlta(eJugador jugadores[], int tamJ);
+
 /// @brief Busca un espacio libre en el array confederaciones de tipo eJugador
 /// @param jugadores Le paso el array de estructuras de tipo eJugador
 /// @param tam Le paso el tamanio del array jugadores
 /// @param pPosicion  Le paso el puntero pPosicion para que reciba la posicion encontrada
-/// @return retorna 1 si salio bien
+/// @return retorna 0 si salio bien
 int BuscarEspacioLibre(eJugador jugadores[], int tam, int *pPosicion);
 
 /// @param jugadores Le paso el array de estructuras de tipo eJugador

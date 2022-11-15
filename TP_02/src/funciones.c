@@ -10,6 +10,25 @@
 #include "input.h"
 #include "jugador.h"
 
+int ValidarAlta(eJugador jugadores[], int tamJ){
+	int isOk = 0;
+
+	for(int i=0;i<tamJ;i++){
+		if(jugadores[i].isEmpty == 1){
+			isOk = 1;
+			return isOk;
+		}
+
+
+	}
+
+
+
+	return isOk;
+}
+
+
+
 int BuscarEspacioLibre(eJugador jugadores[], int tam, int *pPosicion){
 	int isOk = 0;
 
@@ -37,45 +56,45 @@ int BuscarEspacioLibre(eJugador jugadores[], int tam, int *pPosicion){
 //nombre del jugador).
 
 int OrdenarPorNombreConfederacionYNombreJugador(eJugador jugadores[], int tamJ, eConfederacion confederaciones[], int tamC){
-	  eJugador auxJugador;
-		int posicionConf;
-		int posicionConfDos;
-		int isOk = -1;
+	eJugador auxJugador;
+			int posicionConf;
+			int posicionConfDos;
+			int isOk = -1;
 
 
 
-		for( int i=0; i<tamJ-1; i++)
-		{
-			for( int j=i+1; j<tamJ; j++ )
+			for( int i=0; i<tamJ-1; i++)
 			{
-			if(jugadores[i].isEmpty == LLENO)
-			{
+				for( int j=i+1; j<tamJ; j++ )
+				{
+				if(jugadores[i].isEmpty == LLENO)
+				{
 
-				posicionConf = BuscarPosConf(confederaciones,jugadores[i].idConfederacion,tamC);
-				posicionConfDos = BuscarPosConf(confederaciones,jugadores[j].idConfederacion,tamC);
+					posicionConf = BuscarPosConf(confederaciones,jugadores[i].idConfederacion,tamC);
+					posicionConfDos = BuscarPosConf(confederaciones,jugadores[j].idConfederacion,tamC);
 
-				//       'M' > 'F'
-				if(strcmp(confederaciones[posicionConf].nombre, confederaciones[posicionConfDos].nombre) > 0){
-					auxJugador = jugadores[i];
-					jugadores[i] = jugadores[j];
-					jugadores[j] = auxJugador;
-				}
-				// 'M' < 'F' || 'F' == 'F' || 'M' == 'M'
-				else{
-					if(jugadores[i].idConfederacion == jugadores[j].idConfederacion){
-						if(strcmp( jugadores[i].nombre, jugadores[j].nombre) > 0 ){
-							auxJugador = jugadores[i];
-							jugadores[i] = jugadores[j];
-							jugadores[j] = auxJugador;
-						}
+					//       'M' > 'F'
+					if(strcmp(confederaciones[posicionConf].nombre, confederaciones[posicionConfDos].nombre) > 0){
+						auxJugador = jugadores[i];
+						jugadores[i] = jugadores[j];
+						jugadores[j] = auxJugador;
 					}
-				    }
-			}
-		   }
+					// 'M' < 'F' || 'F' == 'F' || 'M' == 'M'
+					else{
+						if(strcmp(confederaciones[posicionConf].nombre, confederaciones[posicionConfDos].nombre) == 0){
+							if(strcmp( jugadores[i].nombre, jugadores[j].nombre) > 0 ){
+								auxJugador = jugadores[i];
+								jugadores[i] = jugadores[j];
+								jugadores[j] = auxJugador;
+							}
+						}
+					    }
+				}
+			   }
 
-		isOk = 1;
-		}
-			 return isOk;
+			isOk = 1;
+			}
+				 return isOk;
 }
 
 
