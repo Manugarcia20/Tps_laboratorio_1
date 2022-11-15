@@ -74,6 +74,9 @@ int controller_listarJugadores(LinkedList* pArrayListJugador)
 
 		if (pArrayListJugador != NULL) {
 			tamList = ll_len(pArrayListJugador);
+
+			printf("\n  ID		NOMBRE COMPLETO			EDAD			POSICION  			NACIONALIDAD	 	  ID SELECCION");
+			printf("\n--------------------------------------------------------------------------------------------------------------------------------------------------\n");
 			for (i = 0; i < tamList; i++) {
 
 				auxJugador = (Jugador*) ll_get(pArrayListJugador, i);
@@ -89,17 +92,6 @@ int controller_listarJugadores(LinkedList* pArrayListJugador)
 				printf("| %-5d |  %-25s  	  |	 %-10d |  %-20s		|	  %-20s  |  %-15d|\n",id,nombreCompleto,edad,posicion,nacionalidad,
 				idSeleccion);
 
-//				if(idSeleccion == 0){
-//				sprintf(auxIdSeleccion,"%d",idSeleccion);
-//				strcpy(auxIdSeleccion,"NO CONVOCADO");
-//				}else{
-//					printf("| %-5d |  %-25s  	  |	 %-10d |  %-20s		|	  %-20s  |  %-15d|\n",id,nombreCompleto,edad,posicion,nacionalidad,
-//					idSeleccion);
-//
-//				}
-
-/// Ver si agregar pArrayListSeleccion a la funcion y refactorizar las otras o no
-
 				retorno = 1;
 			}
 		}
@@ -113,15 +105,13 @@ int controller_agregarJugador(LinkedList* pArrayListJugador)
 		int edad;
 		int idIncrementado;
 		int idSeleccion = 0;
-	//	char idChar[10];
 
-	char auxNombre[100];
-	char auxPosicion[30];
-	char auxNacionalidad[30];
-	char auxEdad[20];
-	char auxIdSeleccion[20];
-	char lastId [10];
-	//char auxId[20];
+		char auxNombre[100];
+		char auxPosicion[30];
+		char auxNacionalidad[30];
+		char auxEdad[20];
+		char auxIdSeleccion[20];
+		char lastId [10];
 
 		Jugador *pJugador;
 
@@ -307,7 +297,6 @@ int controller_removerJugador(LinkedList* pArrayListJugador)
 			    		jug_getId(auxJugador,&id);
 			    		if(idIngresado == id){
 			    			posicion = i;
-			    			printf("%d -- posicion", posicion);
 			    		}
 			    	}
 
@@ -486,7 +475,7 @@ int controller_guardarJugadoresModoTexto(char* path , LinkedList* pArrayListJuga
 				 jug_getIdSeleccion(pJugador,&idSeleccion);
 
 				retornoFscanf = fprintf(archivo,"%d,%s,%d,%s,%s,%d\n",id,nombreCompleto,edad,posicion,nacionalidad,idSeleccion);
-				printf("%d retornoFscanf\n", retornoFscanf);
+//				printf("%d retornoFscanf\n", retornoFscanf);
 
 
 			}
@@ -563,15 +552,25 @@ int controller_listarSelecciones(LinkedList* pArrayListSeleccion)
 	int retorno = -1;
 	int tamList;
 	int i;
+	int id;
+	char pais[50];
+	char confederacion[50];
+	int convocados;
 
 		Seleccion *auxSeleccion;
 
 			if (pArrayListSeleccion != NULL) {
 				tamList = ll_len(pArrayListSeleccion);
+				printf("  ID		PAIS			  CONFEDERACION		  CONVOCADOS\n");
 				for (i = 0; i < tamList; i++) {
 					auxSeleccion = (Seleccion*) ll_get(pArrayListSeleccion, i);
+					selec_getId(auxSeleccion,&id);
+					selec_getPais(auxSeleccion,pais);
+					selec_getConfederacion(auxSeleccion,confederacion);
+					selec_getConvocados(auxSeleccion,&convocados);
 
-				printf("| %-5d |  %-25s  |  %-20s	| %-15d|\n",(*auxSeleccion).id, (*auxSeleccion).pais, (*auxSeleccion).confederacion, (*auxSeleccion).convocados);
+
+				printf("| %-5d |  %-25s  |  %-20s	| %-15d|\n",id,pais,confederacion,convocados);
 
 					retorno = 1;
 				}
@@ -613,9 +612,12 @@ int controller_generarJugadoresModoBinario(char* path,LinkedList* pArrayListJuga
 	int selecId;
 	char confSelec[50];
 //	int cantConv = 0;
-	FILE *pArchivoBinario;
-	Jugador *pJugador;
-	Seleccion* pSeleccion;
+	FILE *pArchivoBinario = NULL;
+	Jugador *pJugador = NULL;
+	Seleccion* pSeleccion = NULL;
+
+	if(pArrayListJugador != NULL && pArrayListSeleccion != NULL)
+	{
 
 	controller_listarSelecciones(pArrayListSeleccion);
 	getStringLetras("\nIngrese el nombre de la confederacion en MAYUSCULAS para el listado de sus jugadores convocados: ",confElegida);
@@ -640,18 +642,20 @@ int controller_generarJugadoresModoBinario(char* path,LinkedList* pArrayListJuga
 				if(idSelec == selecId) /// comparo si el idSeleccion del jugador es igual al id de la seleccion
 				{
 					pSeleccion = (Seleccion*)ll_get(pArrayListSeleccion,j); /// obtengo la posicion de la seleccion
-					selec_getConfederacion(pSeleccion,confSelec);
-					if(strcmp(confElegida,confSelec) == 0)
+					selec_getConfederacion(pSeleccion,confSelec); /// obtengo la confederacion de la posicion
+					if(strcmp(confElegida,confSelec) == 0) /// si la confederacion que ingreso el usuario es igual a la de la posicion
 					{
-					fwrite(pJugador,sizeof(Jugador),1,pArchivoBinario);
+					fwrite(pJugador,sizeof(Jugador),1,pArchivoBinario); /// escribe el archivo binario
 					retorno = 0;
 					}
 				}
 			}
 		}
 	}
+
 	fclose(pArchivoBinario);
 
+	}
 return retorno;
 }
 

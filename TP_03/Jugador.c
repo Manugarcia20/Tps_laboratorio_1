@@ -191,6 +191,7 @@ int convocarJugadores(LinkedList* pArrayListSeleccion,LinkedList* pArrayListJuga
 	int estadoIdSelec;
 	int posicion;
 	int id;
+	int convocados;
 
 //	int auxIdElegido;
 
@@ -237,13 +238,19 @@ int convocarJugadores(LinkedList* pArrayListSeleccion,LinkedList* pArrayListJuga
 			auxSeleccion = (Seleccion*)ll_get(pArrayListSeleccion,posicion-1); /// obtengo la posicion del aux seleccion en la posicion obtenida antes
 			selec_getId(auxSeleccion,&indexSelec); /// obtengo el id de la seleccion
 			jug_getIdSeleccion(auxJugador,&estadoIdSelec); /// me fijo si el jugador ya esta convocado
-			if(estadoIdSelec == 0){
+			selec_getConvocados(auxSeleccion,&convocados);
+			if(estadoIdSelec == 0 && convocados < 22){
 			jug_setIdSeleccion(auxJugador,indexSelec); /// seteo el id ingresado en la posicion correspondiente
+			selec_SetIncrementoConvocados(pArrayListSeleccion,indexSelec); /// incremento el contador de convocados en esa seleccion
 			 retorno = 1;
+			 return retorno;
+			}else{
+				printf("\nError. El jugador ya esta convocado o su seleccion ya tiene 22 jugadores.");
+				return retorno;
 			}
 		}
 
-		selec_SetIncrementoConvocados(pArrayListSeleccion,indexSelec);
+
 
 	return retorno;
 }

@@ -15,7 +15,7 @@ int controller_cargarJugadoresDesdeTexto(char* path , LinkedList* pArrayListJuga
  * \param pArrayListJugador LinkedList*
  * \return int  devuelve 1 si salio bien
  */
-int controller_cargarJugadoresDesdeBinario(char* path , LinkedList* pArrayListJugador);
+int controller_cargarJugadoresDesdeBinario(char* path , LinkedList* pArrayListJugador);///
 
 /** \brief Alta de jugadores
  * \param pArrayListJugador LinkedList* le paso la lista de jugadores
@@ -87,7 +87,7 @@ int controller_cargarSeleccionesDesdeTexto(char* path , LinkedList* pArrayListSe
  * \param pArrayListSeleccion LinkedList* le paso la lista de jugadores
  * \return int devuelve 1 si salio bien
  */
-int controller_guardarSeleccionesModoTexto(char* path , LinkedList* pArrayListSeleccion);
+int controller_guardarSeleccionesModoTexto(char* path , LinkedList* pArrayListSeleccion);///
 
 /** \brief Listar selecciones
  * \param pArrayListSeleccion LinkedList* le paso la lista de jugadores
