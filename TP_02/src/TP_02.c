@@ -49,6 +49,7 @@ eConfederacion confederaciones[TAM_C] = {
 };
 
 eJugador jugadores[TAM_J];
+InicializarJugadores(jugadores,TAM_J);
 
 	do{
 		opcion = menuOpciones();

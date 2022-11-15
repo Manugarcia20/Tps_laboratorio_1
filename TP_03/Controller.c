@@ -643,7 +643,7 @@ int controller_generarJugadoresModoBinario(char* path,LinkedList* pArrayListJuga
 					selec_getConfederacion(pSeleccion,confSelec);
 					if(strcmp(confElegida,confSelec) == 0)
 					{
-					fwrite(pJugador,sizeof(Jugador*),1,pArchivoBinario);
+					fwrite(pJugador,sizeof(Jugador),1,pArchivoBinario);
 					retorno = 0;
 					}
 				}
@@ -689,7 +689,7 @@ int controller_cargarJugadoresDesdeBinario(char* path , LinkedList* pArrayListJu
 
 			while(feof(pArchivoBinario) == 0){
 				pJugador = jug_new();
-				fread(pJugador,sizeof(Jugador*),1,pArchivoBinario);
+				fread(pJugador,sizeof(Jugador),1,pArchivoBinario);
 				if(feof(pArchivoBinario)){
 					free(pJugador);
 					break;

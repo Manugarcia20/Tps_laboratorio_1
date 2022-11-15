@@ -10,6 +10,7 @@
 #include "input.h"
 #include "menu.h"
 #include "confederacion.h"
+#include <ctype.h>
 
 
 
@@ -59,11 +60,24 @@ int AltaJugador(eJugador jugadores[], int tamJ, int *pId, eConfederacion confede
 						printf("\nCaracteres invalidos. Por favor, ingrese solo letras: ");
 					}
 
-					while (getStringLetras("\nIngrese la posicion del jugador: ",nuevoJugador.posicion) == -1)
+					printf("\nPOSICIONES\n- Arquero\n- Defensor\n- Mediocampista\n- Delantero\n");
+					if(getStringLetras("\nEscriba la posicion del jugador: ",nuevoJugador.posicion) == 0)
 					{
-
+					for (int i = 0; nuevoJugador.posicion[i] != '\0'; i++){
+						nuevoJugador.posicion[i] = tolower(nuevoJugador.posicion[i]);
+					}
+					while(strcmp(nuevoJugador.posicion,"arquero") != 0 && strcmp(nuevoJugador.posicion,"defensor") != 0 && strcmp(nuevoJugador.posicion,"mediocampista") != 0
+						&& strcmp(nuevoJugador.posicion,"delantero") != 0){
+						printf("\nPosicion invalida. Por favor, ingrese una posicion correcta.");
+						getStringLetras("\nEscriba la posicion del jugador: ",nuevoJugador.posicion);
+						for (int i = 0; nuevoJugador.posicion[i] != '\0'; i++){
+							nuevoJugador.posicion[i] = tolower(nuevoJugador.posicion[i]);
+							}
+					}
+					}else{
 						printf("\nCaracteres invalidos. Por favor, ingrese solo letras: ");
 					}
+
 
 					numCamiseta = getValidInt("\nIngrese numero de camiseta: ","\nError, ingrese un numero: ", 1,99);
 					nuevoJugador.numeroCamiseta = numCamiseta;
@@ -170,7 +184,7 @@ int ModificarJugador(eJugador jugadores[], int tamJ , int idJugadorCambio, eConf
 						posJugadorCambio = BuscarJugador(jugadores, tamJ, idJugadorCambio);
 						if (posJugadorCambio != -1) //el jugador existe
 								{
-							respuesta = getChar("\nEsta seguro de que quiere modificar al jugador %d ? s/n ");
+							respuesta = getChar("\nEsta seguro de que quiere modificar al jugador? s/n ");
 							if (respuesta == 's') {
 								do{
 								subMenu = subMenuModificar();
