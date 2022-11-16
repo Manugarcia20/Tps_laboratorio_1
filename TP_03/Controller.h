@@ -74,11 +74,9 @@ int controller_generarJugadoresModoBinario(char* path,LinkedList* pArrayListJuga
 int controller_guardarJugadoresModoBinario(char* path , LinkedList* pArrayListJugador);
 
 /** \brief Carga los datos de los selecciones desde el archivo selecciones.csv (modo texto).
- *
- * \param path char*
- * \param pArrayListSeleccion LinkedList*
- * \return int
- *
+ * \param path char* le paso el nombre del archivo
+ * \param pArrayListSeleccion LinkedList* le paso la lista de selecciones
+ * \return int devuelve 1 si salio bien
  */
 int controller_cargarSeleccionesDesdeTexto(char* path , LinkedList* pArrayListSeleccion); ///
 

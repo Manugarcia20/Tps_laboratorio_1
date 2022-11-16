@@ -114,44 +114,74 @@ int getValidFloat(char requestMessage[],char errorMessage[], int lowLimit, int h
 }
 
 
-int PedirCadena(char cadena[],int len,char mensaje[])
+int utn_getChar ( char* pResultado, char* mensaje, char* mensajeError)
 {
-	int retorno;
-	char buffer[1024];
-	int largoBuffer;
-
-	retorno = -1;
-
-	printf("%s",mensaje);
-	fflush(stdin);
-	scanf("%[^\n]",buffer);
-
-	largoBuffer = (int)strlen(buffer);
-
-	if(len > largoBuffer)
+	char aux[256];
+	int retorno = 0;
+	if(pResultado != NULL)
 	{
-		strcpy(cadena,buffer);
-		retorno = 1;
-	}
+		do{
 
+			fflush(stdin);
+			printf ( "%s" ,mensaje);
+			if(getChar1(aux)==1)
+			{
+				strcpy(pResultado,aux);
+				retorno = 1;
+				break;
+			}
+			printf("%s",mensajeError);
+
+		}while(retorno == 0);
+	}
 
 	return retorno;
 }
-
-int getStringLetras(char mensaje[],char input[])
+int getChar1(char * pResultado)
 {
-    char aux[256];
-    getString(mensaje,aux);
-    if(esSoloLetras(aux))
-    {
-        strcpy(input,aux);
-        fflush(stdin);
-        return 0;
-    }else{
-    return -1;
-    }
-}
+	int retorno = 0;
+	char buffer[256];
+	if (pResultado != NULL)
+	{
+		if (myGets(buffer, sizeof(buffer)) == 0 && esNumericaChar(buffer) == 1) {
+			strcpy(pResultado, buffer);
+			retorno = 1;
+		}
+	}
+	return retorno;
 
+}
+int myGets(char *cadena, int longitud) {
+	if (cadena != NULL && longitud > 0
+			&& fgets(cadena, longitud, stdin) == cadena) {
+		fflush(stdin);
+		if (cadena[strlen(cadena) - 1] == '\n') {
+			cadena[strlen(cadena) - 1] = '\0';
+		}
+		return 0;
+	}
+	return -1;
+}
+int esNumericaChar(char *cadena) {
+	int retorno;
+	int i = 0;
+
+	if (cadena != NULL && strlen(cadena) > 0) {
+		retorno = 1;
+		while (cadena[i] != '\0') {
+			if (cadena[i] >= '0' && cadena[i] <= '9') {
+				retorno = 0;
+				break;
+			}
+			i++;
+		}
+
+	} else {
+		retorno = 0;
+	}
+	return retorno;
+
+}
 
 
 int getStringAlfaNumerico(char mensaje[],char input[])
@@ -204,12 +234,14 @@ int esNumericoFlotante(char str[])
 int esSoloLetras(char str[])
 {
    int i=0;
+
    while(str[i] != '\0')
    {
        if((str[i] != ' ') && (str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z'))
            return 0;
        i++;
    }
+
    return 1;
 }
 

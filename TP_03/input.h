@@ -71,24 +71,24 @@ int getValidInt(char requestMessage[], char errorMessage[], int lowLimit,
 int getValidFloat(char requestMessage[],char errorMessage[], int lowLimit, int hiLimit);
 
 
-/**
- * \brief Solicita un string
- * \param cadena se le pasa cadena
- * \param len cantidad maxima de caracteres permitidos
- * \param mensaje Es el mensaje a ser mostrado para solicitar el dato
- * \return Retorna 1 si se pudo hacer correctamente
+/// @param pResultado variable para recibir el char ingresado
+/// @param mensaje mensaje que se le muestra al usuario
+/// @param mensajeError mensaje de error que se le muestra al usuario
+/// @return retorna 1 si sale bien
+int utn_getChar ( char* pResultado, char* mensaje, char* mensajeError);
 
- */
-int PedirCadena(char cadena[],int len,char mensaje[]);
+/// @param pResultado
+/// @return
+int getChar1 ( char * pResultado);
 
-///**
-// * \brief Solicita un texto al usuario y lo devuelve
-// * \param mensaje Es el mensaje a ser mostrado
-// * \param input Array donde se cargará el texto ingresado
-// * \return 1 si el texto contiene solo letras
-// */
+/// @param cadena
+/// @param longitud
+/// @return
+int myGets(char *cadena, int longitud);
 
-int getStringLetras(char mensaje[], char input[]);
+/// @param cadena
+/// @return
+int esNumericaChar(char *cadena);
 
 
 /**

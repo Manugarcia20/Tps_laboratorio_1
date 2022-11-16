@@ -121,23 +121,16 @@ int controller_agregarJugador(LinkedList* pArrayListJugador)
 				pJugador = jug_new();
 				if (pJugador != NULL) {
 
-//
-					if(getStringLetras("\nIngrese el nombre del jugador:  \n",auxNombre) == -1) {
-
-						printf("\nError, intente nuevamente ingresando SOLO letras. \n");
-					}
+//					PedirCadena(auxNombre,30,"\nIngrese el nombre del jugador:  \n");
+					utn_getChar(auxNombre,"\nIngrese el nombre del jugador: ","\nError. Ingrese solo letras: ");
 
 					edad = getValidInt("\nIngrese la edad del jugador:  ","\nError, ingrese solo numeros: ",16,45);
 
 					sprintf(auxEdad,"%d",edad);
 
-					if (getStringLetras("\nIngrese la posicion del jugador:  \n",auxPosicion) == -1) {
-						printf("\nError, intente nuevamente ingresando SOLO letras. \n");
-					}
+					utn_getChar(auxPosicion,"\nIngrese la posicion del jugador: ","\nError. Ingrese solo letras: ");
 
-					if (getStringLetras("\nIngrese la nacionalidad del jugador:  \n",auxNacionalidad) == 1) {
-						printf("\nError, intente nuevamente ingresando SOLO letras. \n");
-					}
+					utn_getChar (auxNacionalidad,"\nIngrese la nacionalidad del jugador:  ","\nError. Ingrese solo letras: ");
 
 					sprintf(auxIdSeleccion,"%d",idSeleccion);
 
@@ -223,34 +216,25 @@ int controller_editarJugador(LinkedList* pArrayListJugador)
     						switch(subMenu){
     						case 1:
     							printf("\nUsted eligio: MODIFICAR NOMBRE\n");
-    							while (getStringLetras("\nIngrese un nuevo nombre: ", auxNombre) == -1)
-    							{
-    							printf("\nCaracteres invalidos. Por favor, ingrese solo letras");
-    							}
+    							utn_getChar(auxNombre,"\nIngrese el nuevo nombre del jugador: ","\nError. Ingrese solo letras: ");
     							jug_setNombreCompleto(auxJugador,auxNombre);
     							controller_listarJugadores(pArrayListJugador);
     							break;
     						case 2:
-    							printf("\nUsted eligio: MODIFICAR EDAD\n");
-    							 edad = getValidInt("\nIngrese una nueva edad:  ", "\nError. Ingrese un numero: \n",16,45);
+    							 printf("\nUsted eligio: MODIFICAR EDAD\n");
+    							 edad = getValidInt("\nIngrese una nueva edad: ", "\nError. Ingrese un numero: \n",16,45);
     							 jug_setEdad(auxJugador,edad);
     							 controller_listarJugadores(pArrayListJugador);
     							break;
     						case 3:
     							printf("\nUsted eligio: MODIFICAR POSICION\n");
-    							while (getStringLetras("\nIngrese una nueva posicion: ", auxPosicion) == -1)
-    							{
-    							printf("\nCaracteres invalidos. Por favor, ingrese solo letras");
-    							}
+    							utn_getChar(auxPosicion,"\nIngrese una nueva posicion: ","\nError. Ingrese solo letras: ");
     							jug_setPosicion(auxJugador,auxPosicion);
     							controller_listarJugadores(pArrayListJugador);
     							break;
     						case 4:
     							printf("\nUsted eligio: MODIFICAR NACIONALIDAD\n");
-    							while (getStringLetras("\nIngrese una nueva nacionalidad: ", auxNacionalidad) == -1)
-    							{
-    							printf("\nCaracteres invalidos. Por favor, ingrese solo letras");
-    							}
+    							utn_getChar(auxNacionalidad,"\nIngrese la nueva nacionalidad: ","\nError. Ingrese solo letras: ");
     							jug_setNacionalidad(auxJugador,auxNacionalidad);
     							controller_listarJugadores(pArrayListJugador);
     							break;
@@ -280,14 +264,15 @@ int controller_removerJugador(LinkedList* pArrayListJugador)
 {
 		int retorno = -1;
 		int tamList;
-		char respuesta[10];
+		char respuesta;
 		int idIngresado;
 		int idSeleccion;
 		int id;
 		int posicion;
 
 		Jugador* auxJugador = NULL;
-		if (pArrayListJugador != NULL) {
+		if (pArrayListJugador != NULL)
+		{
 
 			controller_listarJugadores(pArrayListJugador);
 			tamList = ll_len(pArrayListJugador);
@@ -305,11 +290,12 @@ int controller_removerJugador(LinkedList* pArrayListJugador)
 					auxJugador = (Jugador*)ll_get(pArrayListJugador,posicion);
 
 
-			if (auxJugador != NULL) {
-				if(getStringLetras("Está seguro que quiere eliminar este jugador? s/n:  \n", respuesta) == -1){
-					printf("\nError, ingrese solo letras: \n");
-				}
-				if(strcmp(respuesta,"s") == 0){
+			if (auxJugador != NULL)
+			{
+
+				respuesta = getChar("Está seguro que quiere eliminar este jugador? s/n:  \n");
+				if(respuesta == 's')
+				{
 
 					jug_getIdSeleccion(auxJugador,&idSeleccion);
 					printf("id seleccion -- %d ", idSeleccion);
@@ -327,8 +313,8 @@ int controller_removerJugador(LinkedList* pArrayListJugador)
 					printf("Baja cancelada \n");
 				}
 
-									}
-}
+			}
+		}
 
 		return retorno;
 }
@@ -347,10 +333,8 @@ int controller_ordenarJugadores(LinkedList* pArrayListJugador)
 		switch (ordenar) {
 		case 1:
 			printf("\nUsted eligio: ORDENAR JUGADORES POR NACIONALIDAD\n");
-			criterio =
-					getValidInt(
-							"\nIngrese 0 para ordenar de manera ascendente o 1 para ordenar de manera descendente: \n",
-							"\nError. Ingrese un numero: \n", 0, 1);
+			criterio = getValidInt("\nIngrese 0 para ordenar de manera ascendente o 1 para ordenar de manera descendente: \n",
+				"\nError. Ingrese un numero: \n", 0, 1);
 			if (criterio == 0) {
 				ll_sort(pArrayListJugador, ordenarJugadoresPorNacionalidad, 0);
 				controller_listarJugadores(pArrayListJugador);
@@ -363,10 +347,8 @@ int controller_ordenarJugadores(LinkedList* pArrayListJugador)
 			break;
 		case 2:
 			printf("\nUsted eligio: ORDENAR JUGADORES POR EDAD\n");
-			criterio2 =
-					getValidInt(
-							"\nIngrese 0 para ordenar de manera ascendente o 1 para ordenar de manera descendente: \n",
-							"\nError. Ingrese un numero: \n", 0, 1);
+			criterio2 = getValidInt("\nIngrese 0 para ordenar de manera ascendente o 1 para ordenar de manera descendente: \n",
+					"\nError. Ingrese un numero: \n", 0, 1);
 			if (criterio2 == 0) {
 				ll_sort(pArrayListJugador, ordenarJugadoresPorEdad, 0);
 				controller_listarJugadores(pArrayListJugador);
@@ -380,8 +362,7 @@ int controller_ordenarJugadores(LinkedList* pArrayListJugador)
 		case 3:
 			printf("\nUsted eligio: ORDENAR JUGADORES POR NOMBRE\n");
 			criterio3 =
-					getValidInt(
-							"\nIngrese 0 para ordenar de manera ascendente o 1 para ordenar de manera descendente: \n",
+					getValidInt("\nIngrese 0 para ordenar de manera ascendente o 1 para ordenar de manera descendente: \n",
 							"\nError. Ingrese un numero: \n", 0, 1);
 			if (criterio3 == 0) {
 				ll_sort(pArrayListJugador, ordenarJugadoresPorNombre, 0);
@@ -578,7 +559,7 @@ int controller_ordenarSelecciones(LinkedList* pArrayListSeleccion)
 		controller_listarSelecciones(pArrayListSeleccion);
 	} else {
 		if (criterio == 1)
-			ll_sort(pArrayListSeleccion, ordenarSeleccionesPorConfederacion, 1);
+		ll_sort(pArrayListSeleccion, ordenarSeleccionesPorConfederacion, 1);
 		retorno =1;
 		controller_listarSelecciones(pArrayListSeleccion);
 }
@@ -604,7 +585,7 @@ int controller_generarJugadoresModoBinario(char* path,LinkedList* pArrayListJuga
 	{
 
 	controller_listarSelecciones(pArrayListSeleccion);
-	getStringLetras("\nIngrese el nombre de la confederacion en MAYUSCULAS para el listado de sus jugadores convocados: ",confElegida);
+	utn_getChar(confElegida,"\nIngrese el nombre EN MAYUSCULAS de la confederacion a informar convocados: ","\nError. Ingrese solo letras: ");
 
 	pArchivoBinario = fopen(path, "wb");
 
@@ -667,27 +648,29 @@ int controller_cargarJugadoresDesdeBinario(char* path , LinkedList* pArrayListJu
 {
 	int retorno = -1;
 
-		FILE* pArchivoBinario;
+	FILE* pArchivoBinario;
 
-		Jugador* pJugador = NULL;
+	pArchivoBinario = fopen(path,"rb");
 
-		if(pArrayListJugador != NULL){
+	if(path != NULL && pArrayListJugador != NULL && pArrayListJugador)
+	{
 
-			pArchivoBinario = fopen(path,"rb");
-
-			while(feof(pArchivoBinario) == 0){
-				pJugador = jug_new();
-				fread(pJugador,sizeof(Jugador),1,pArchivoBinario);
-				if(feof(pArchivoBinario)){
-					free(pJugador);
-					break;
-				}
-				ll_add(pArrayListJugador,pJugador);
+		if(parser_JugadorFromBinary(pArchivoBinario,pArrayListJugador) == 0)
+		{
+			printf("\nDATOS DE JUGADORES BINARIOS PARSEADOS CORRECTAMENTE\n");
 				retorno = 0;
-			}
-			fclose(pArchivoBinario);
 		}
-		controller_listarJugadores(pArrayListJugador);
-		    return retorno;
+		else
+		{
+			printf("\nNO SE PUDIERON PARSEAR LOS DATOS DE JUGADORES BINARIOS\n");
+		}
+	}
 
+	fclose(pArchivoBinario);
+
+	controller_listarJugadores(pArrayListJugador);
+
+return retorno;
 }
+
+

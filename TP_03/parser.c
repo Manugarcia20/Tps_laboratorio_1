@@ -60,7 +60,25 @@ int parser_JugadorFromText(FILE* pFile , LinkedList* pArrayListJugador)
  */
 int parser_JugadorFromBinary(FILE* pFile , LinkedList* pArrayListJugador)
 {
-    return 1;
+	int retorno = -1;
+
+	Jugador* pJugador = NULL;
+
+		if(pFile != NULL && pArrayListJugador != NULL){
+
+			while(feof(pFile) == 0){
+				pJugador = jug_new();
+				fread(pJugador,sizeof(Jugador),1,pFile);
+				if(feof(pFile)){
+					free(pJugador);
+					break;
+				}
+				ll_add(pArrayListJugador,pJugador);
+				retorno = 0;
+			}
+			fclose(pFile);
+		}
+return retorno;
 }
 
 
