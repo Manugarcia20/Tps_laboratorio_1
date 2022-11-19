@@ -38,6 +38,8 @@ float porcentajeConcacaf;
 float porcentajeOfc;
 
 
+eJugador jugadores[TAM_J];
+
 eConfederacion confederaciones[TAM_C] = {
 		{100,"CONMEBOL","SUDAMERICA",1916},
 		{101,"UEFA","EUROPA",1954},
@@ -47,8 +49,8 @@ eConfederacion confederaciones[TAM_C] = {
 		{105,"OFC","OCEANIA",1966}
 };
 
-eJugador jugadores[TAM_J];
-InicializarJugadores(jugadores,TAM_J);
+
+	InicializarJugadores(jugadores,TAM_J);
 
 	do{
 		opcion = menuOpciones();
@@ -96,17 +98,30 @@ InicializarJugadores(jugadores,TAM_J);
 				switch(informes){
 				case 1:
 					printf("Usted eligio:Listado de los jugadores ordenados alfabéticamente por nombre de confederación y nombre de jugador:  \n");
-					OrdenarPorNombreConfederacionYNombreJugador(jugadores,TAM_J,confederaciones,TAM_C);
+					if(OrdenarPorNombreConfederacionYNombreJugador(jugadores,TAM_J,confederaciones,TAM_C) == 1){
 					MostrarListaJugadores(jugadores,TAM_J,confederaciones,TAM_C);
+					printf("\nJugadores ordenados por confederacion y nombre correctamente. ");
+					}else{
+						printf("\nNo se pudo ordenar por confederacion y nombre. ");
+					}
 					break;
 				case 2:
 					printf("Usted eligio: Listado de confederaciones con sus jugadores: \n");
-					MostrarJugadorPorConfederacion(jugadores,TAM_J,confederaciones,TAM_C);
+					if(MostrarJugadorPorConfederacion(jugadores,TAM_J,confederaciones,TAM_C) == 1){
+						printf("\nJugadores listados correctamente. ");
+					}else{
+						printf("\nNo se pudieron listar los jugadores por confederacion. ");
+					}
 					break;
 				case 3:
 					printf("Usted eligio: Total y promedio de todos los salarios y cuántos jugadores cobran más del salario promedio: \n");
-					CalcularTotalYPromedio(jugadores,TAM_J,&promedio);
-					SuperanPromedio(jugadores,TAM_J,promedio);
+					if(CalcularTotalYPromedio(jugadores,TAM_J,&promedio)==1){
+					if(SuperanPromedio(jugadores,TAM_J,promedio)==1){
+						printf("\nCalculos realizados correctamente");
+					}
+					}else{
+						printf("\nNo se pudieron realizar los calculos");
+					}
 					break;
 				case 4:
 					printf("Usted eligio: Informar la confederación con mayor cantidad de años de contratos total: \n");
@@ -121,7 +136,11 @@ InicializarJugadores(jugadores,TAM_J);
 					break;
 				case 6:
 					printf("Usted eligio: Informar cual es la región con más jugadores y el listado de los mismos: \n\n");
-					CalcularRegionMaxJugadores(jugadores,TAM_J,confederaciones,TAM_C);
+					if(CalcularRegionMaxJugadores(jugadores,TAM_J,confederaciones,TAM_C)== 1){
+						printf("\nCalculos realizados correctamente. ");
+					}else{
+						printf("\nNo se pudieron realizar los calculos. ");
+					}
 					break;
 				case 7:
 					printf("\nUsted eligio: Salir\n");

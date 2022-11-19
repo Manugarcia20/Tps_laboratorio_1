@@ -138,7 +138,7 @@ int SuperanPromedio(eJugador jugadores[], int tamJ, float promedio){
 				superan++;
 			}
 	}
-	printf("\nHay %d jugador/es que superan el promedio de los salarios ",superan);
+	printf("\nHay %d jugador/es que superan el promedio de los salarios\n ",superan);
 	isOk =1;
 
 

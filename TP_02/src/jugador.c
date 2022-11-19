@@ -5,22 +5,22 @@
  *      Author: manu
  */
 
+#include <ctype.h>
 #include "jugador.h"
 #include "funciones.h"
 #include "input.h"
 #include "menu.h"
 #include "confederacion.h"
-#include <ctype.h>
 
 
 
-int InicializarJugadores(eJugador jugadores[], int tam){
+int InicializarJugadores(eJugador jugadores[], int tamJ){
 	int i;
 	int isOK = -1;
 
 
-	if (jugadores != NULL && tam > 0) {
-		for (i = 0; i < tam; i++) {
+	if (jugadores != NULL && tamJ > 0) {
+		for (i = 0; i < tamJ; i++) {
 			jugadores[i].isEmpty = VACIO;
 			isOK = 0;
 		}
@@ -54,29 +54,23 @@ int AltaJugador(eJugador jugadores[], int tamJ, int *pId, eConfederacion confede
 				}
 				else
 				{
-					while (getStringLetras("\nIngrese el nombre del jugador: ",nuevoJugador.nombre) == -1)
-					{
-						fflush(stdin);
-						printf("\nCaracteres invalidos. Por favor, ingrese solo letras: ");
-					}
+					utn_getChar(nuevoJugador.nombre,"\nIngrese el nombre del jugador: ","\nError. Ingrese solo letras: ");
 
 					printf("\nPOSICIONES\n- Arquero\n- Defensor\n- Mediocampista\n- Delantero\n");
-					if(getStringLetras("\nEscriba la posicion del jugador: ",nuevoJugador.posicion) == 0)
-					{
+					utn_getChar(nuevoJugador.posicion,"\nIngrese la posicion del jugador: ","\nError. Ingrese solo letras: ");
+
 					for (int i = 0; nuevoJugador.posicion[i] != '\0'; i++){
 						nuevoJugador.posicion[i] = tolower(nuevoJugador.posicion[i]);
 					}
 					while(strcmp(nuevoJugador.posicion,"arquero") != 0 && strcmp(nuevoJugador.posicion,"defensor") != 0 && strcmp(nuevoJugador.posicion,"mediocampista") != 0
 						&& strcmp(nuevoJugador.posicion,"delantero") != 0){
 						printf("\nPosicion invalida. Por favor, ingrese una posicion correcta.");
-						getStringLetras("\nEscriba la posicion del jugador: ",nuevoJugador.posicion);
+						utn_getChar(nuevoJugador.posicion,"\nIngrese la posicion del jugador: ","\nError. Ingrese solo letras: ");
 						for (int i = 0; nuevoJugador.posicion[i] != '\0'; i++){
 							nuevoJugador.posicion[i] = tolower(nuevoJugador.posicion[i]);
 							}
 					}
-					}else{
-						printf("\nCaracteres invalidos. Por favor, ingrese solo letras: ");
-					}
+
 
 
 					numCamiseta = getValidInt("\nIngrese numero de camiseta: ","\nError, ingrese un numero: ", 1,99);
@@ -100,6 +94,7 @@ int AltaJugador(eJugador jugadores[], int tamJ, int *pId, eConfederacion confede
 					(*pId)++;
 
 					jugadores[posicion] = nuevoJugador;
+					printf("\nPosicion del alta: %d",posicion);
 					isOk = 1;
 
 				}
@@ -117,17 +112,17 @@ int BuscarJugador(eJugador jugadores[], int tamJ, int id){
 	int posicionJugador;
 
 		posicionJugador = -1; /*En caso de no haber espacio, lista nula o id inexistente*/
+		printf("\nTAMANIO DEL TAMJ: %d",tamJ);
 
 		if (jugadores != NULL && tamJ > 0) {
 			for (int i = 0; i < tamJ; i++) {
 				if (jugadores[i].idJugador == id) {
 					posicionJugador = i;
+					return posicionJugador;
 				}
 			}
 		}
 		return posicionJugador;
-
-
 }
 
 
@@ -144,8 +139,11 @@ int BajaJugador(eJugador jugadores[], int tamJ, int idJugadorBaja, eConfederacio
 				MostrarListaJugadores(jugadores,tamJ,confederaciones,tamC); //--muestro jugadores activos
 
 				idJugadorBaja = getValidInt( "\nIngrese el id del jugador a eliminar:  ", "Error, ingrese un ID valido:  ", 1, 3000);
+				printf("\nId jugador baja: %d",idJugadorBaja);
 
 				posJugadorBaja = BuscarJugador(jugadores, tamJ, idJugadorBaja);
+				printf("\nPosicion jugador baja: %d",posJugadorBaja);
+
 
 				if (posJugadorBaja != -1) //el empleado existe
 						{
@@ -167,108 +165,107 @@ int BajaJugador(eJugador jugadores[], int tamJ, int idJugadorBaja, eConfederacio
 }
 
 int ModificarJugador(eJugador jugadores[], int tamJ , int idJugadorCambio, eConfederacion confederaciones[], int tamC){
-		int isOk;
-		int subMenu;
-		int posJugadorCambio;
-		short nuevaCamiseta;
-		int nuevaConf;
-		float nuevoSalario;
-		int nuevoAnioContrato;
-		char respuesta;
+
+int isOk;
+int subMenu;
+int posJugadorCambio;
+short nuevaCamiseta;
+int nuevaConf;
+float nuevoSalario;
+int nuevoAnioContrato;
+char respuesta;
 
 
-					isOk = -1;
-					if (jugadores != NULL && tamJ > 0) {
-						printf("\n		*** MODIFICACION DE JUGADORES ***						\n\n");
-						MostrarListaJugadores(jugadores,tamJ,confederaciones,tamC); //--muestro jugadores activos
-						idJugadorCambio = getValidInt( "\nIngrese el id del jugador a modificar:  ", "Error, ingrese un ID valido:  ", 1, 3000);
-						posJugadorCambio = BuscarJugador(jugadores, tamJ, idJugadorCambio);
-						if (posJugadorCambio != -1) //el jugador existe
-								{
-							respuesta = getChar("\nEsta seguro de que quiere modificar al jugador? s/n ");
-							if (respuesta == 's') {
-								do{
-								subMenu = subMenuModificar();
-								switch(subMenu){
-								case 1:
-									printf("\nUsted eligio: MODIFICAR NOMBRE\n");
-									while (getStringLetras("\nIngrese un nuevo nombre: ", jugadores[posJugadorCambio].nombre) == -1)
-									{
-									printf("\nCaracteres invalidos. Por favor, ingrese solo letras");
-									}
-									MostrarListaJugadores(jugadores,tamJ,confederaciones,tamC);
-									break;
-								case 2:
-									printf("\nUsted eligio: MODIFICAR POSICION\n");
+	isOk = -1;
+	if (jugadores != NULL && tamJ > 0) {
+		printf("\n		*** MODIFICACION DE JUGADORES ***						\n\n");
+		MostrarListaJugadores(jugadores,tamJ,confederaciones,tamC); //--muestro jugadores activos
+		idJugadorCambio = getValidInt( "\nIngrese el id del jugador a modificar:  ", "Error, ingrese un ID valido:  ", 1, 3000);
+		printf("\nId jugador cambio: %d",idJugadorCambio);
+		posJugadorCambio = BuscarJugador(jugadores, tamJ, idJugadorCambio);
+		printf("\nPosicion jugador cambio: %d",posJugadorCambio);
+		if (posJugadorCambio != -1) //el jugador existe
+		{
+			respuesta = getChar("\nEsta seguro de que quiere modificar al jugador? s/n ");
+			if (respuesta == 's') {
+				do{
+				subMenu = subMenuModificar();
+				switch(subMenu){
+				case 1:
+					printf("\nUsted eligio: MODIFICAR NOMBRE\n");
+					utn_getChar(jugadores[posJugadorCambio].nombre,"\nIngrese el nuevo nombre del jugador: ","\nError. Ingrese solo letras: ");
+					MostrarListaJugadores(jugadores,tamJ,confederaciones,tamC);
+					break;
+				case 2:
+					printf("\nUsted eligio: MODIFICAR POSICION\n");
 
-									printf("\nPOSICIONES\n- Arquero\n- Defensor\n- Mediocampista\n- Delantero\n");
-									if(getStringLetras("\nEscriba la posicion del jugador: ", jugadores[posJugadorCambio].posicion) == 0)
-									{
-									for (int i = 0; jugadores->posicion[i] != '\0'; i++){
-										jugadores[posJugadorCambio].posicion[i] = tolower(jugadores[posJugadorCambio].posicion[i]);
-									}
-									while(strcmp(jugadores[posJugadorCambio].posicion,"arquero") != 0 && strcmp(jugadores[posJugadorCambio].posicion,"defensor") != 0
-										&& strcmp(jugadores[posJugadorCambio].posicion,"mediocampista") != 0
-										&& strcmp(jugadores[posJugadorCambio].posicion,"delantero") != 0){
-										printf("\nPosicion invalida. Por favor, ingrese una posicion correcta.");
-										getStringLetras("\nEscriba la posicion del jugador: ",jugadores[posJugadorCambio].posicion);
-										for (int i = 0; jugadores[posJugadorCambio].posicion[i] != '\0'; i++){
-											jugadores[posJugadorCambio].posicion[i] = tolower(jugadores[posJugadorCambio].posicion[i]);
-											}
-									}
-									}else{
-										printf("\nCaracteres invalidos. Por favor, ingrese solo letras: ");
-									}
-									MostrarListaJugadores(jugadores,tamJ,confederaciones,tamC);
-									break;
-								case 3:
-									printf("\nUsted eligio: MODIFICAR NUMERO DE CAMISETA\n");
-									nuevaCamiseta = getShort("Ingrese el nuevo numero de camiseta: ");
-									jugadores[posJugadorCambio].numeroCamiseta = nuevaCamiseta;
-									MostrarListaJugadores(jugadores,tamJ,confederaciones,tamC);
-									break;
-								case 4:
-									printf("\nUsted eligio: MODIFICAR CONFEDERACION\n");
-									 MostrarConfederacion(confederaciones,tamC);
-									 nuevaConf = getValidInt("\nIngrese el id de la nueva confederacion: " , "\nError, ingrese un id valido: ",100,105);
-									 jugadores[posJugadorCambio].idConfederacion = nuevaConf;
-									 MostrarListaJugadores(jugadores,tamJ,confederaciones,tamC);
-									break;
-								case 5:
-									printf("\nUsted eligio: MODIFICAR SALARIO\n");
+					printf("\nPOSICIONES\n- Arquero\n- Defensor\n- Mediocampista\n- Delantero\n");
+					utn_getChar(jugadores[posJugadorCambio].posicion,"\nIngrese la nueva posicion del jugador: ","\nError. Ingrese solo letras: ");
 
-									nuevoSalario = getValidFloat("\nIngrese el nuevo salario: " , "\nError, ingrese un salario valido: ",1,100000000);
-									jugadores[posJugadorCambio].salario = nuevoSalario;
-									MostrarListaJugadores(jugadores,tamJ,confederaciones,tamC);
-									break;
-								case 6:
-									printf("\nUsted eligio: MODIFICAR ANIOS DE CONTRATO\n");
-									nuevoAnioContrato = getValidInt("\nIngrese la cantidad de anios de contrato: " , "\nError, ingrese un numero del 1 al 6: ",1,6);
-									jugadores[posJugadorCambio].aniosContrato = nuevoAnioContrato;
-									MostrarListaJugadores(jugadores,tamJ,confederaciones,tamC);
-									break;
-								case 7:
-									printf("\nUsted eligio: SALIR\n");
-									break;
-								default:
-									printf("\nOpcion incorrecta. Ingrese una opcion valida: ");
-									break;
-								}
-								}while(subMenu !=7);
-
-								isOk =1;
-							}else{
-								printf("\nMODIFICACION CANCELADA");
-							}
-
-
-	}else
-	{
-		printf("\nNo hay ningun libro cargado con el id %d", idJugadorCambio);
-	}
+					for (int i = 0; jugadores->posicion[i] != '\0'; i++){
+						jugadores[posJugadorCambio].posicion[i] = tolower(jugadores[posJugadorCambio].posicion[i]);
 					}
+					while(strcmp(jugadores[posJugadorCambio].posicion,"arquero") != 0 && strcmp(jugadores[posJugadorCambio].posicion,"defensor") != 0
+						&& strcmp(jugadores[posJugadorCambio].posicion,"mediocampista") != 0
+						&& strcmp(jugadores[posJugadorCambio].posicion,"delantero") != 0)
+					{
+						printf("\nPosicion invalida. Por favor, ingrese una posicion correcta.");
+						utn_getChar(jugadores[posJugadorCambio].posicion,"\nIngrese la nueva posicion del jugador: ","\nError. Ingrese solo letras: ");
 
-		return isOk;
+						for (int i = 0; jugadores[posJugadorCambio].posicion[i] != '\0'; i++){
+							jugadores[posJugadorCambio].posicion[i] = tolower(jugadores[posJugadorCambio].posicion[i]);
+							}
+					}
+					MostrarListaJugadores(jugadores,tamJ,confederaciones,tamC);
+					break;
+				case 3:
+					printf("\nUsted eligio: MODIFICAR NUMERO DE CAMISETA\n");
+					nuevaCamiseta = getShort("Ingrese el nuevo numero de camiseta: ");
+					jugadores[posJugadorCambio].numeroCamiseta = nuevaCamiseta;
+					MostrarListaJugadores(jugadores,tamJ,confederaciones,tamC);
+					break;
+				case 4:
+					printf("\nUsted eligio: MODIFICAR CONFEDERACION\n");
+					 MostrarConfederacion(confederaciones,tamC);
+					 nuevaConf = getValidInt("\nIngrese el id de la nueva confederacion: " , "\nError, ingrese un id valido: ",100,105);
+					 jugadores[posJugadorCambio].idConfederacion = nuevaConf;
+					 MostrarListaJugadores(jugadores,tamJ,confederaciones,tamC);
+					break;
+				case 5:
+					printf("\nUsted eligio: MODIFICAR SALARIO\n");
+
+					nuevoSalario = getValidFloat("\nIngrese el nuevo salario: " , "\nError, ingrese un salario valido: ",1,100000000);
+					jugadores[posJugadorCambio].salario = nuevoSalario;
+					MostrarListaJugadores(jugadores,tamJ,confederaciones,tamC);
+					break;
+				case 6:
+					printf("\nUsted eligio: MODIFICAR ANIOS DE CONTRATO\n");
+					nuevoAnioContrato = getValidInt("\nIngrese la cantidad de anios de contrato: " , "\nError, ingrese un numero del 1 al 6: ",1,6);
+					jugadores[posJugadorCambio].aniosContrato = nuevoAnioContrato;
+					MostrarListaJugadores(jugadores,tamJ,confederaciones,tamC);
+					break;
+				case 7:
+					printf("\nUsted eligio: SALIR\n");
+					break;
+				default:
+					printf("\nOpcion incorrecta. Ingrese una opcion valida: ");
+					break;
+				}
+				}while(subMenu !=7);
+
+				isOk =1;
+			}else{
+				printf("\nMODIFICACION CANCELADA");
+			}
+
+
+		}else
+		{
+			printf("\nNo hay ningun libro cargado con el id %d", idJugadorCambio);
+		}
+						}
+
+			return isOk;
 
 }
 

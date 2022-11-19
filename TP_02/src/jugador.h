@@ -13,7 +13,7 @@
 
 #include "confederacion.h"
 
-#define TAM_J 6
+#define TAM_J 3000
 #define LLENO 1
 #define VACIO 0
 
@@ -37,7 +37,7 @@ typedef struct {
 /// @param jugadores Le paso el array de estructuras de tipo eJugador
 /// @param tam Le paso el tamanio del array
 /// @return retorna 0 si salio bien
-int InicializarJugadores(eJugador jugadores[], int tam);
+int InicializarJugadores(eJugador jugadores[], int tamJ);
 
 
 /// @brief Realiza el proceso de alta de un jugador pidiendo todos los datos para cargarlos en una posicion del array

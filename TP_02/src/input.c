@@ -111,29 +111,77 @@ int getValidFloat(char requestMessage[],char errorMessage[], int lowLimit, int h
 }
 
 
-int PedirCadena(char cadena[],int len,char mensaje[])
+
+int getChar1(char * pResultado)
 {
-	int retorno;
-	char buffer[1024];
-	int largoBuffer;
-
-	retorno = -1;
-
-	printf("%s",mensaje);
-	fflush(stdin);
-	scanf("%[^\n]",buffer);
-
-	largoBuffer = (int)strlen(buffer);
-
-	if(len > largoBuffer)
+	int retorno = 0;
+	char buffer[256];
+	if (pResultado != NULL)
 	{
-		strcpy(cadena,buffer);
-		retorno = 1;
+		if (myGets(buffer, sizeof(buffer)) == 0 && esNumericaChar(buffer) == 1) {
+			strcpy(pResultado, buffer);
+			retorno = 1;
+		}
 	}
+	return retorno;
 
+}
+int myGets(char *cadena, int longitud) {
+	if (cadena != NULL && longitud > 0
+			&& fgets(cadena, longitud, stdin) == cadena) {
+		fflush(stdin);
+		if (cadena[strlen(cadena) - 1] == '\n') {
+			cadena[strlen(cadena) - 1] = '\0';
+		}
+		return 0;
+	}
+	return -1;
+}
+int esNumericaChar(char *cadena) {
+	int retorno;
+	int i = 0;
+
+	if (cadena != NULL && strlen(cadena) > 0) {
+		retorno = 1;
+		while (cadena[i] != '\0') {
+			if (cadena[i] >= '0' && cadena[i] <= '9') {
+				retorno = 0;
+				break;
+			}
+			i++;
+		}
+
+	} else {
+		retorno = 0;
+	}
+	return retorno;
+
+}
+
+int utn_getChar ( char* pResultado, char* mensaje, char* mensajeError)
+{
+	char aux[256];
+	int retorno = 0;
+	if(pResultado != NULL)
+	{
+		do{
+
+			fflush(stdin);
+			printf ( "%s" ,mensaje);
+			if(getChar1(aux)==1)
+			{
+				strcpy(pResultado,aux);
+				retorno = 1;
+				break;
+			}
+			printf("%s",mensajeError);
+
+		}while(retorno == 0);
+	}
 
 	return retorno;
 }
+
 
 int getStringLetras(char mensaje[],char input[])
 {
