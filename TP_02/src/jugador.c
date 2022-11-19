@@ -94,7 +94,7 @@ int AltaJugador(eJugador jugadores[], int tamJ, int *pId, eConfederacion confede
 					(*pId)++;
 
 					jugadores[posicion] = nuevoJugador;
-					printf("\nPosicion del alta: %d",posicion);
+
 					isOk = 1;
 
 				}
@@ -112,7 +112,7 @@ int BuscarJugador(eJugador jugadores[], int tamJ, int id){
 	int posicionJugador;
 
 		posicionJugador = -1; /*En caso de no haber espacio, lista nula o id inexistente*/
-		printf("\nTAMANIO DEL TAMJ: %d",tamJ);
+
 
 		if (jugadores != NULL && tamJ > 0) {
 			for (int i = 0; i < tamJ; i++) {
@@ -134,15 +134,16 @@ int BajaJugador(eJugador jugadores[], int tamJ, int idJugadorBaja, eConfederacio
 
 			isOk = -1;
 			if (jugadores != NULL && tamJ > 0) {
+
 				printf("\n		*** BAJA DE JUGADORES ***						\n\n");
 
 				MostrarListaJugadores(jugadores,tamJ,confederaciones,tamC); //--muestro jugadores activos
 
 				idJugadorBaja = getValidInt( "\nIngrese el id del jugador a eliminar:  ", "Error, ingrese un ID valido:  ", 1, 3000);
-				printf("\nId jugador baja: %d",idJugadorBaja);
+
 
 				posJugadorBaja = BuscarJugador(jugadores, tamJ, idJugadorBaja);
-				printf("\nPosicion jugador baja: %d",posJugadorBaja);
+
 
 
 				if (posJugadorBaja != -1) //el empleado existe
@@ -179,11 +180,13 @@ char respuesta;
 	isOk = -1;
 	if (jugadores != NULL && tamJ > 0) {
 		printf("\n		*** MODIFICACION DE JUGADORES ***						\n\n");
+
 		MostrarListaJugadores(jugadores,tamJ,confederaciones,tamC); //--muestro jugadores activos
+
 		idJugadorCambio = getValidInt( "\nIngrese el id del jugador a modificar:  ", "Error, ingrese un ID valido:  ", 1, 3000);
-		printf("\nId jugador cambio: %d",idJugadorCambio);
+
 		posJugadorCambio = BuscarJugador(jugadores, tamJ, idJugadorCambio);
-		printf("\nPosicion jugador cambio: %d",posJugadorCambio);
+
 		if (posJugadorCambio != -1) //el jugador existe
 		{
 			respuesta = getChar("\nEsta seguro de que quiere modificar al jugador? s/n ");
