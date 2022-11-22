@@ -282,9 +282,13 @@ int MostrarUnJugador(eJugador jugador, eConfederacion confederaciones[], int tam
 		{
 		CargarDescripcionConfederacion(confederaciones, tamC, jugador.idConfederacion, descConfederacion);
 
-		printf("\n%d    %-15s        %-15s\t\t%2hd\t\t%.2f\t%s\t\t\t%2hd\n", jugador.idJugador, jugador.nombre,jugador.posicion,
+		printf("|%d\t| %-14s| %-14s| %hd\t\t| %.2f\t| %10s|   %-12d|\n", jugador.idJugador, jugador.nombre,jugador.posicion,
 		 jugador.numeroCamiseta, jugador.salario,descConfederacion, jugador.aniosContrato);
 		printf("\n-----------------------------------------------------------------------------------------------------------------------------------------\n");
+
+
+
+
 
 		}
 		isOk = 1;
@@ -307,7 +311,7 @@ int MostrarListaJugadores(eJugador jugadores[], int tamJ, eConfederacion confede
 			printf("\n-------------------------------------------------------------------------------------------------------------------------------------\n");
 			printf("\n		*** LISTA DE JUGADORES ***		\n");
 			printf("---------------------------------------------------------------------------------------------------------------------------------------\n");
-			printf("ID\tNOMBRE\t\t  POSICION\t\tNUMERO DE CAMISETA\tSALARIO\t\tCONFEDERACION\t  ANIOS DE CONTRATO\t\n");
+			printf("ID\t NOMBRE\t\t  POSICION\tNUMERO DE CAMISETA  SALARIO\tCONFEDERACION\tANIOS DE CONTRATO\t\n");
 			printf("\n-------------------------------------------------------------------------------------------------------------------------------------\n");
 
 			for (i = 0; i < tamJ; i++) {
