@@ -105,8 +105,8 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
 	int retorno = -1;
 	int tamList;
 
-	    Node* newNode;
-	    Node* prevNode;
+	Node* newNode;
+	Node* prevNode;
 
 	    tamList = ll_len(this);
 
@@ -122,13 +122,14 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
 	    	if(nodeIndex == 0) /// si lo quiero en la primera posicion
 	    	{
 	    		newNode->pNextNode = this->pFirstNode; /// a mi nuevo nodo en el puntero al siguiente nodo le asigno la direccion de memoria
-	    											  /// del primer nodo del siguiente elemento
-	    											  ///
-	    		this->pFirstNode = newNode; ///el nuevo first node sera el que cree
+	    											  /// del primer nodo de la lista
+
+	    		this->pFirstNode = newNode; ///el nuevo first node sera el proximo que cree
 	    	}
 	    	else
 	    	{
 	    		prevNode = getNode(this, nodeIndex - 1);///busco la ubicacion del nodo previo al que creo
+
 	    		if(prevNode != NULL)
 	    		{
 	    		newNode->pNextNode = prevNode->pNextNode; /// al nuevo nodo le asigno el puntero al siguiente nodo que tenia el nodo previo.
@@ -176,8 +177,9 @@ int ll_add(LinkedList* this, void* pElement)
 
     largo = ll_len(this); /// saco el tamanio de la lista
 
-    if(this != NULL){
-    addNode(this,largo,pElement); /// agrego el nodo con la lista, su tamanio calculado y el pElement
+    if(this != NULL)
+    {
+     addNode(this,largo,pElement); /// agrego el nodo con la lista, su tamanio calculado y el pElement
      returnAux = 0;
     }
 
@@ -262,10 +264,14 @@ int ll_remove(LinkedList* this,int index)
 
         if(this != NULL && index >= 0 && index < tamanio) /// el index no puede ser mayor al tamanio de la lista y debe ser mayor a 0
         {
-        	if(index == 0) /// si lo quiero en la primera posicion
+        	pNode = getNode(this, index);
+
+        	if(index == 0) /// si quiero eliminar la primera posicion
         	{
-        		pNode = this->pFirstNode; /// el nodo apunta a la direc de memoria del primer nodo de la lista
         		this->pFirstNode = pNode->pNextNode; /// el primer nodo de la lista ahora tiene la direccion de memoria del siguiente nodo
+        		this->size--;  /// decremento el tamanio de la lista
+        		free(pNode); /// libero el espacio en memoria del nodo
+
         	}
         	else
         	{
@@ -273,19 +279,14 @@ int ll_remove(LinkedList* this,int index)
 
         		if(pPrevNode != NULL)
         		{
-        		pNode = pPrevNode->pNextNode; /// el nodo va a apuntar al siguiente nodo que apuntaba el anterior
         		pPrevNode->pNextNode = pNode->pNextNode; /// ahora el nodo que apuntaba el prevNode va a ser el que apunte este nodo
+        		this->size--;  /// decremento el tamanio de la lista
+        		free(pNode); /// libero el espacio en memoria del nodo
+
         		}
         	}
 
-        	if(index == 0 || pPrevNode != NULL) /// si se cumplio alguna de las dos y luego de respectivas asignaciones
-        	{
-			free(pNode); /// libero el espacio en memoria del nodo
-			pNode = NULL; /// lo seteo en null
-
-			this->size--;  /// decremento el tamanio de la lista
-			returnAux = 0;
-        	}
+        	returnAux = 0;
         }
 
 
@@ -527,8 +528,22 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
 LinkedList* ll_subList(LinkedList* this,int from,int to)
 {
     LinkedList* cloneArray = NULL;
+    void* pElement = NULL;
 
-    return cloneArray;
+    if(this != NULL && from >= 0 && from < ll_len(this) && to > from && to <= ll_len(this)){ /// si from es mayor o igual a 0, menor al tamanio de la lista
+    																						/// y el to es mayor al from y to menor o igual al tamanio de la lista
+    cloneArray = ll_newLinkedList(); /// creo el linkedlist clon
+
+    	for(int i = from ; i < to; i++){ /// for desde from hasta to
+    		pElement = ll_get(this,i); /// saco los elementos en la lista pasada en los indices deseados
+    		ll_add(cloneArray,pElement); /// agrego esos elementos a la lista clonada
+    	}
+    }
+
+
+
+
+    return cloneArray; /// devuelvo la lista con los elementos agregados deseados
 }
 
 
@@ -543,6 +558,14 @@ LinkedList* ll_clone(LinkedList* this)
 {
     LinkedList* cloneArray = NULL;
 
+    if(this != NULL){
+
+    cloneArray = ll_subList(this, 0, ll_len(this)); /// copio todos los elementos de la lista this a la clon, desde la posicion 0 hasta
+     	 	 	 	 	 	 	 	 	 	 	 	/// el tamanio de la lista.
+
+//    cloneArray = ll_newLinkedList(); /// creo el linkedlist clon
+//    cloneArray = this;
+    }
     return cloneArray;
 }
 
@@ -557,8 +580,35 @@ LinkedList* ll_clone(LinkedList* this)
 int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
 {
     int returnAux =-1;
+    void* pElement1 =NULL;
+    void* pElement2 =NULL;
+
+    if(this!= NULL && pFunc!= NULL && (order == 1 || order ==0)){
+
+    	for(int i = 0; i<ll_len(this)-1;i++){
+    												/// burbujeo
+    		for(int j = i+1;j<ll_len(this);j++){
+
+    			pElement1 = ll_get(this,i); /// traigo elementos de i
+
+    			pElement2 = ll_get(this,j); /// traigo elementos de j
+
+
+    			if ((order == 1 && pFunc(pElement1,pElement2) == 1)
+
+    			|| (order == 0 && pFunc(pElement1,pElement2)  == -1)){
+
+    				ll_set(this,i,pElement2);
+    											/// swap
+    				ll_set(this,j,pElement1);
+    			}
+
+    		}
+
+    	}
+    	returnAux = 0;
+    }
 
     return returnAux;
-
 }
 
