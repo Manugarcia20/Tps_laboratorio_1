@@ -106,23 +106,6 @@ int jug_setIdSeleccion(Jugador* this,int idSeleccion);
 /// @return  retorna 0 si sale bien
 int jug_getIdSeleccion(Jugador* this,int* idSeleccion);
 
-/// @brief Realiza el proceso de convocacion de los jugadores
-/// @param pArrayListSeleccion Le paso un array de jugadores de tipo LinkedList
-/// @param pArrayListJugador Le paso un array de selecciones de tipo LinkedList
-/// @return retorna 1 si sale bien
-int convocarJugadores(LinkedList* pArrayListSeleccion,LinkedList* pArrayListJugador);
-
-/// @brief Lista solo los jugadores convocados a una seleccion
-/// @param pArrayListJugador Le paso un array de jugadores de tipo LinkedList
-/// @return retorna 1 si sale bien
-int listarJugadoresConvocados(LinkedList* pArrayListJugador);
-
-/// @brief Realiza el proceso de desconvocar los jugadores convocados
-/// @param pArrayListJugador Le paso un array de jugadores de tipo LinkedList
-/// @param pArrayListSeleccion Le paso un array de selecciones de tipo LinkedList
-/// @return retorna 1 si sale bien
-int desconvocarJugadores(LinkedList* pArrayListJugador,LinkedList* pArrayListSeleccion);
-
 /// @brief Ordena la lista de jugadores por nacionalidad
 /// @param jugador1 le paso una variable de tipo puntero a void para usarla luego en el ll_sort y ordenar
 /// @param jugador2 le paso una variable de tipo puntero a void para usarla luego en el ll_sort y ordenar

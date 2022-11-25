@@ -17,10 +17,10 @@ int main()
     char respuesta;
     int informes;
     int opcion;
-    int flagBinario = 0;
     int flagGuardarJug = 0;
     int flagGuardarSelec = 0;
     char guardar;
+    int flagCarga = 0;
 
 
 
@@ -35,16 +35,22 @@ int main()
         {
             case 1:
             	printf("\nUsted eligio: CARGA DE ARCHIVOS\n");
+            	if(flagCarga < 2){
             	if(controller_cargarJugadoresDesdeTexto("jugadores.csv",listaJugadores) == 1){
             		printf("\nARCHIVO DE JUGADORES CARGADO CORRECTAMENTE\n");
+            		flagCarga++;
             	}else{
             		printf("\nERROR, NO SE PUDO CARGAR EL ARCHIVO DE JUGADORES\n");
             	}
 
             	if(controller_cargarSeleccionesDesdeTexto("selecciones.csv",listaSelecciones) == 1){
             		printf("\nARCHIVO DE SELECCIONES CARGADO CORRECTAMENTE\n");
+            		flagCarga++;
             	}else{
             		printf("\nERROR, NO SE PUDO CARGAR EL ARCHIVO DE SELECCIONES\n");
+            	}
+            	}else{
+            		printf("\nError. Los archivos de jugadores y selecciones ya fueron cargados previamente ");
             	}
                 break;
             case 2:
@@ -57,7 +63,7 @@ int main()
                 break;
             case 3:
             	printf("\nUsted eligio: MODIFICACION DE JUGADOR\n");
-            	if((ll_isEmpty(listaJugadores) == 0) && (ll_isEmpty(listaJugadores) == 0)){
+            	if((ll_isEmpty(listaJugadores) == 0) && (ll_isEmpty(listaSelecciones) == 0)){
 
             	if(controller_editarJugador(listaJugadores) == 1){
             		printf("\nMODIFICACION EXITOSA");
@@ -71,7 +77,7 @@ int main()
 
             case 4:
             	printf("\nUsted eligio: BAJA DE JUGADOR\n");
-            	if((ll_isEmpty(listaJugadores) == 0) && (ll_isEmpty(listaJugadores) == 0)){
+            	if((ll_isEmpty(listaJugadores) == 0) && (ll_isEmpty(listaSelecciones) == 0)){
             	if(controller_removerJugador(listaJugadores) == 1){
             		printf("\nBAJA EXITOSA");
             	}else{
@@ -83,13 +89,13 @@ int main()
                 break;
             case 5:
             	printf("\nUsted eligio: LISTADOS\n");
-            	if((ll_isEmpty(listaJugadores) == 0) && (ll_isEmpty(listaJugadores) == 0)){
+            	if((ll_isEmpty(listaJugadores) == 0) && (ll_isEmpty(listaSelecciones) == 0)){
             	do{
             		informes = subMenuInformes();
             		switch(informes){
             		case 1:
             			printf("\nUsted eligio: TODOS LOS JUGADORES\n");
-            			if(controller_listarJugadores(listaJugadores) != 1){
+            			if(controller_listarJugadores2(listaJugadores,listaSelecciones) != 1){
             				printf("\nError. No se pudieron listar los jugadores.\n");
             			}
             			break;
@@ -101,7 +107,7 @@ int main()
             		    break;
             		case 3:
             			printf("\nUsted eligio: JUGADORES CONVOCADOS\n");
-            			if(listarJugadoresConvocados(listaJugadores) != 1){
+            			if(listarJugadoresConvocados(listaJugadores,listaSelecciones) != 1){
             				printf("\nError. No se pudieron listar los jugadores convocados.\n");
             			}
             		    break;
@@ -116,7 +122,7 @@ int main()
                 break;
             case 6:
             	printf("\nUsted eligio: CONVOCAR JUGADORES\n");
-            	if((ll_isEmpty(listaJugadores) == 0) && (ll_isEmpty(listaJugadores) == 0)){
+            	if((ll_isEmpty(listaJugadores) == 0) && (ll_isEmpty(listaSelecciones) == 0)){
             		controller_convocarJugadores(listaJugadores,listaSelecciones);
             	}else{
             		printf("\nError. Se deben cargar los archivos de jugadores y selecciones o dar de alta un jugador para convocarlo\n");
@@ -124,7 +130,7 @@ int main()
                 break;
             case 7:
             	printf("\nUsted eligio: ORDENAR Y LISTAR\n");
-            	if((ll_isEmpty(listaJugadores) == 0) && (ll_isEmpty(listaJugadores) == 0)){
+            	if((ll_isEmpty(listaJugadores) == 0) && (ll_isEmpty(listaSelecciones) == 0)){
             	opcion = getValidInt("\nQUE DESEA ORDENAR Y LISTAR?: \n1- JUGADORES\n2- SELECCIONES\nopcion:","\nError. Ingrese un numero: ",1,2);
             	if(opcion == 1){
             	if(controller_ordenarJugadores(listaJugadores) != 1){
@@ -147,41 +153,37 @@ int main()
             	break;
             case 8:
             	printf("\nUsted eligio: GENERAR ARCHIVO BINARIO\n");
-            	if((ll_isEmpty(listaJugadores) == 0) && (ll_isEmpty(listaJugadores) == 0)){
-            	if(controller_generarJugadoresModoBinario("JugadoresBinarios.dat",listaJugadores,listaSelecciones) == 0){
+            	if((ll_isEmpty(listaJugadores) == 0) && (ll_isEmpty(listaSelecciones) == 0)){
+            	if(controller_generarJugadoresModoBinario("JugadoresBinarios.dat",listaJugadores,listaSelecciones) == 1){
             		printf("\nArchivo binario generado correctamente. \n");
             	}else{
             		printf("\nError. El archivo binario no se pudo generar correctamente. \n");
             	}
-            	flagBinario =1;
+
             	}else{
             		printf("\nNo se puede generar el archivo binario sin antes cargar los archivos de jugadores y selecciones.\n");
             	}
                 break;
             case 9:
             	printf("\nUsted eligio: CARGAR ARCHIVO BINARIO\n");
-            	if(flagBinario ==1){
-            		if(controller_cargarJugadoresDesdeBinario("JugadoresBinarios.dat",listaConvocadosPorConf) == 0){
+            		if(controller_cargarJugadoresDesdeBinario("JugadoresBinarios.dat",listaConvocadosPorConf) == 1){
             			printf("\nArchivo cargado correctamente. \n");
             		}else{
             			printf("\nError. No se pudo cargar el archivo. \n");
             		}
-            	}else{
-            		printf("\nNo se puede cargar el archivo binario sin antes haberlo generado\n");
-            	}
                 break;
             case 10:
             	printf("\nUsted eligio: GUARDAR ARCHIVOS .CSV\n");
-            	if((ll_isEmpty(listaJugadores) == 0) && (ll_isEmpty(listaJugadores) == 0))
+            	if((ll_isEmpty(listaJugadores) == 0) && (ll_isEmpty(listaSelecciones) == 0))
             	{
             		if(controller_guardarJugadoresModoTexto("jugadores.csv" ,listaJugadores) == 1)
             		{
-            			printf("\nDATOS DE JUGADORES GUARDADOS CORRECTAMENTE\n");
+            			printf("\nGUARDADO DE JUGADORES EXITOSO\n");
             			flagGuardarJug = 1;
             		}
             		 if(controller_guardarSeleccionesModoTexto("selecciones.csv",listaSelecciones) == 1)
             		 {
-            			 printf("\nDATOS DE SELECCIONES GUARDADOS CORRECTAMENTE");
+            			 printf("\nGUARDADO DE SELECCIONES EXITOSO\n");
             			 flagGuardarSelec = 1;
             		 }
 

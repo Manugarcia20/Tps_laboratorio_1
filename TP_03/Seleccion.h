@@ -62,17 +62,7 @@ int selec_getConvocados(Seleccion* this,int* convocados);
 /// @return retorna -1 si la primer variable es mayor que la segunda, 1 si la segunda variable es mas grande que la primera, 0 si son iguales
 int ordenarSeleccionesPorConfederacion(void* seleccion1,void* seleccion2);
 
-/// @brief incrementa el valor de los convocados dentro de la estructura de tipo Seleccion
-/// @param this le paso una variable de tipo LinkedList
-/// @param jugIdSelec le paso la variable para darle el valor a la estructura
-/// @return retorna 0 si sale bien
-int selec_SetIncrementoConvocados(LinkedList* this, int jugIdSelec);
 
-/// @brief decrementa el valor de los convocados dentro de la estructura de tipo Seleccion
-/// @param this  le paso una variable de tipo LinkedList
-/// @param jugIdSelec le paso la variable para darle el valor a la estructura
-/// @return retorna 0 si sale bien
-int selec_SetDecrementoConvocados(LinkedList* this, int jugIdSelec);
 
 #endif // selec_H_INCLUDED
 

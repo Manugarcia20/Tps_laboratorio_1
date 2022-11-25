@@ -42,6 +42,14 @@ int controller_removerJugador(LinkedList* pArrayListJugador); ///
  */
 int controller_listarJugadores(LinkedList* pArrayListJugador); ///
 
+
+
+int controller_listarJugadores2(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);
+
+
+
+
+
 /** \brief Ordenar jugadores
  * \param pArrayListJugador LinkedList* le paso la lista de jugadores
  * \return int  devuelve 1 si salio bien
@@ -73,25 +81,47 @@ int controller_generarJugadoresModoBinario(char* path,LinkedList* pArrayListJuga
 /// @return
 int controller_guardarJugadoresModoBinario(char* path , LinkedList* pArrayListJugador);
 
+
+/// @brief Realiza el proceso de convocacion de los jugadores
+/// @param pArrayListSeleccion Le paso un array de selecciones de tipo LinkedList
+/// @param pArrayListJugador Le paso un array de jugadores de tipo LinkedList
+/// @return retorna 1 si sale bien
+int convocarJugadores(LinkedList* pArrayListSeleccion,LinkedList* pArrayListJugador);
+
+/// @brief Lista solo los jugadores convocados a una seleccion
+/// @param pArrayListJugador Le paso un array de jugadores de tipo LinkedList
+/// @param  pArrayListSeleccion Le paso un array de selecciones de tipo LinkedList
+/// @return retorna 1 si sale bien
+int listarJugadoresConvocados(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);
+
+/// @brief Realiza el proceso de desconvocar los jugadores convocados
+/// @param pArrayListJugador Le paso un array de jugadores de tipo LinkedList
+/// @param pArrayListSeleccion Le paso un array de selecciones de tipo LinkedList
+/// @return retorna 1 si sale bien
+int desconvocarJugadores(LinkedList* pArrayListJugador,LinkedList* pArrayListSeleccion);
+
+
 /** \brief Carga los datos de los selecciones desde el archivo selecciones.csv (modo texto).
  * \param path char* le paso el nombre del archivo
  * \param pArrayListSeleccion LinkedList* le paso la lista de selecciones
  * \return int devuelve 1 si salio bien
  */
+
 int controller_cargarSeleccionesDesdeTexto(char* path , LinkedList* pArrayListSeleccion); ///
 
 /** \brief Guarda los datos de los selecciones en el archivo selecciones.csv (modo texto).
  * \param path char* le paso el nombre del archivo
- * \param pArrayListSeleccion LinkedList* le paso la lista de jugadores
+ * \param pArrayListSeleccion LinkedList* le paso la lista de selecciones
  * \return int devuelve 1 si salio bien
  */
 int controller_guardarSeleccionesModoTexto(char* path , LinkedList* pArrayListSeleccion);///
 
 /** \brief Listar selecciones
- * \param pArrayListSeleccion LinkedList* le paso la lista de jugadores
+ * \param pArrayListSeleccion LinkedList* le paso la lista de selecciones
  * \return int devuelve 1 si salio bien
  */
 int controller_listarSelecciones(LinkedList* pArrayListSeleccion); ///
+
 
 /** \brief Ordenar selecciones
  * \param pArrayListSeleccion LinkedList* le paso la lista de selecciones
@@ -100,7 +130,17 @@ int controller_listarSelecciones(LinkedList* pArrayListSeleccion); ///
 int controller_ordenarSelecciones(LinkedList* pArrayListSeleccion); ///
 
 
+/// @brief incrementa el valor de los convocados dentro de la estructura de tipo Seleccion
+/// @param this le paso una variable de tipo LinkedList
+/// @param jugIdSelec le paso la variable para darle el valor a la estructura
+/// @return retorna 0 si sale bien
+int selec_SetIncrementoConvocados(LinkedList* this, int jugIdSelec);
 
+/// @brief decrementa el valor de los convocados dentro de la estructura de tipo Seleccion
+/// @param this  le paso una variable de tipo LinkedList
+/// @param jugIdSelec le paso la variable para darle el valor a la estructura
+/// @return retorna 0 si sale bien
+int selec_SetDecrementoConvocados(LinkedList* this, int jugIdSelec);
 
 
 

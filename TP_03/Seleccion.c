@@ -141,57 +141,6 @@ int ordenarSeleccionesPorConfederacion(void* seleccion1,void* seleccion2){
 	return retorno;
 }
 
-int selec_SetIncrementoConvocados(LinkedList* this, int jugIdSelec){
-	int retorno =-1;
-	int tamListSelec;
-	int idPosicion;
-
-	tamListSelec = ll_len(this);
-
-	Seleccion* pSeleccion = NULL;
-	if(this != NULL && jugIdSelec >= 0)
-	{
-		for(int i = 0;i<tamListSelec;i++)
-		{
-			pSeleccion = (Seleccion*)ll_get(this,i);
-			selec_getId(pSeleccion,&idPosicion);
-			if( idPosicion == jugIdSelec)
-			{
-			pSeleccion->convocados += 1;
-			retorno = 0;
-			return retorno;
-			}
-		}
-	}
-	return retorno;
-	}
-
-
-int selec_SetDecrementoConvocados(LinkedList* this, int jugIdSelec)
-{
-	int retorno =-1;
-	int tamListSelec;
-	int idPosicion;
-
-	tamListSelec = ll_len(this);
-
-	Seleccion* pSeleccion = NULL;
-	if(this != NULL && jugIdSelec >= 0)
-	{
-		for(int i = 0;i<tamListSelec;i++)
-		{
-			pSeleccion = (Seleccion*)ll_get(this,i);
-			selec_getId(pSeleccion,&idPosicion);
-			if(idPosicion == jugIdSelec)
-			{
-			pSeleccion->convocados -= 1;
-			retorno = 0;
-			return retorno;
-			}
-		}
-	}
-	return retorno;
-}
 
 
 

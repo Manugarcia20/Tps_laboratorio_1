@@ -19,4 +19,12 @@ int parser_JugadorFromBinary(FILE* pFile , LinkedList* pArrayListJugador);
 int parser_SeleccionFromText(FILE* pFile , LinkedList* pArrayListSeleccion);
 
 
+
+int parser_GuardarJugadoresModoTexto(FILE* pFile, LinkedList* pArrayListJugador);
+
+int parser_GuardarSeleccionesModoTexto(FILE* pFile, LinkedList* pArrayListSeleccion);
+
+int parser_GenerarJugadoresModoBinario(FILE* pFile,LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);
+
+
 #endif /* PARSER_H_ */

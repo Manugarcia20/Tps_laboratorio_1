@@ -3,6 +3,7 @@
 #include "LinkedList.h"
 #include "Jugador.h"
 #include "Seleccion.h"
+#include "input.h"
 
 /** \brief Parsea los datos de los jugadores desde el archivo jugadores.csv (modo texto).
  *
@@ -74,7 +75,7 @@ int parser_JugadorFromBinary(FILE* pFile , LinkedList* pArrayListJugador)
 					break;
 				}
 				ll_add(pArrayListJugador,pJugador);
-				retorno = 0;
+				retorno = 1;
 			}
 			fclose(pFile);
 		}
@@ -128,3 +129,129 @@ int parser_SeleccionFromText(FILE* pFile , LinkedList* pArrayListSeleccion)
 		    return retorno;
 }
 
+int parser_GuardarJugadoresModoTexto(FILE* pFile, LinkedList* pArrayListJugador){
+	int retorno = -1;
+	int id;
+	char nombreCompleto[30];
+	int  edad;
+	char posicion[30];
+	char nacionalidad[30];
+	int idSeleccion;
+	int cantidad;
+
+	Jugador* pJugador = NULL;
+
+	cantidad = ll_len(pArrayListJugador);
+
+	if(pFile != NULL && pArrayListJugador != NULL)
+	{
+
+		fprintf(pFile,"id,nombreCompleto,edad,posicion,nacionalidad,idSeleccion\n");
+
+		for(int i = 0; i < cantidad;i++)
+		{
+			pJugador = (Jugador*) ll_get(pArrayListJugador, i);
+
+			 jug_getId(pJugador,&id);
+			 jug_getNombreCompleto(pJugador,nombreCompleto);
+			 jug_getEdad(pJugador,&edad);
+			 jug_getPosicion(pJugador,posicion);
+			 jug_getNacionalidad(pJugador,nacionalidad);
+			 jug_getIdSeleccion(pJugador,&idSeleccion);
+
+			fprintf(pFile,"%d,%s,%d,%s,%s,%d\n",id,nombreCompleto,edad,posicion,nacionalidad,idSeleccion);
+		}
+		retorno = 1;
+	}
+
+
+	return retorno;
+}
+
+int parser_GuardarSeleccionesModoTexto(FILE* pFile, LinkedList* pArrayListSeleccion){
+
+	int  id;
+	char pais[30];
+	char confederacion[30];
+	int  convocados;
+	int cantidad;
+	int retorno = -1;
+
+	Seleccion* pSeleccion = NULL;
+
+	cantidad = ll_len(pArrayListSeleccion);
+
+	if(pFile != NULL && pArrayListSeleccion != NULL)
+	{
+		fprintf(pFile,"id,pais,confederacion,convocados\n"); //lectura fantasma
+
+		for(int i = 0; i < cantidad;i++)
+		{
+
+			pSeleccion = (Seleccion*) ll_get(pArrayListSeleccion, i);
+
+			 selec_getId(pSeleccion,&id);
+			 selec_getPais(pSeleccion,pais);
+			 selec_getConfederacion(pSeleccion,confederacion);
+			 selec_getConvocados(pSeleccion,&convocados);
+
+			 fprintf(pFile,"%d,%s,%s,%d\n",id,pais,confederacion,convocados);
+		}
+				retorno = 1;
+	}
+
+return retorno;
+}
+
+int parser_GenerarJugadoresModoBinario(FILE* pFile,LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion){
+
+	int retorno = -1;
+	int cantidad;
+	int cantSelec;
+	char confElegida[50];
+	int idSelec;
+	int selecId;
+	char confSelec[50];
+
+	Jugador *pJugador = NULL;
+	Seleccion* pSeleccion = NULL;
+
+		cantidad = ll_len(pArrayListJugador);
+		cantSelec = ll_len(pArrayListSeleccion);
+
+
+		printf("\nCONFEDERACIONES: \n");
+		printf("\n -AFC\n -CAF\n -CONCACAF\n -CONMEBOL\n -OFC\n -UEFA\n");
+		utn_getChar(confElegida,"\nIngrese el nombre EN MAYUSCULAS de la confederacion a informar convocados: ","\nError. Ingrese solo letras: ");
+
+
+	if(pFile != NULL && pArrayListJugador != NULL && pArrayListSeleccion != NULL)
+		{
+		for (int i = 0; i < cantidad; i++)
+			{
+
+				pJugador = (Jugador*)ll_get(pArrayListJugador, i); /// obtengo la posicion del jugador
+				jug_getIdSeleccion(pJugador, &idSelec); /// obtengo el idSeleccion del jugador
+
+				if (idSelec > 0)/// si el jugador esta convocado
+				{
+					for(int j =0;j<cantSelec;j++)
+					{ /// recorro la list de selecciones
+						pSeleccion = (Seleccion*)ll_get(pArrayListSeleccion,j); /// obtengo la posicion de la seleccion
+						selec_getId(pSeleccion,&selecId); /// obtengo el id de la seleccion
+						if(idSelec == selecId) /// comparo si el idSeleccion del jugador es igual al id de la seleccion
+						{
+							pSeleccion = (Seleccion*)ll_get(pArrayListSeleccion,j); /// obtengo la posicion de la seleccion
+							selec_getConfederacion(pSeleccion,confSelec); /// obtengo la confederacion de la posicion
+							if(strcmp(confElegida,confSelec) == 0) /// si la confederacion que ingreso el usuario es igual a la de la posicion
+							{
+							fwrite(pJugador,sizeof(Jugador),1,pFile); /// escribe el archivo binario
+							retorno = 1;
+							}
+						}
+					}
+				}
+			}
+		}
+return retorno;
+}
